@@ -7,21 +7,29 @@
 ```mermaid
 graph TB
     User(用户) --> Browser[浏览器网址]
-    Browser --> Gateway[网关,注册中心,请求路由]
-    Gateway --> Service1[服务器1]
-    Gateway --> Service2[服务器2]
-    Gateway --> Service3[服务器3]
-    Gateway --> Service...[服务器...]
+    Browser --> Gateway[网关]
+    Gateway -.> Nacos(注册中心)
+    Nacos --> Service1[服务器1]
+    Nacos --> Service2[服务器2]
+    Nacos --> Service3[服务器3]
+    Nacos --> Service...[服务器...]
     Service1 --> Server1((微服务1))
     Service1 --> Server2((微服务2))
     Service2 --> Server3((微服务3))
     Service2 --> Server4((微服务4))
     Service3 --> Server5((微服务5_假设卡住))
     Server2 --> Remoting(远程调用其它微服务)
-    Remoting -.远程调用(走注册中心服务发现,再到服务器再到微服务).-> Gateway
-    Server1 -.多个微服务共同组成一共业务,可视作一共事务,需要引入微服务事务机制.-> server3
+    Remoting -.走注册中心服务发现,再到服务器再到微服务.-> Nacos
+    Server1 -.多个分布式部署的微服务共同组成一共业务,需要使用分布式事务.-> Server3
     Server3 -.被调用服务卡住,导致整条业务全部卡住,被称为服务雪崩,需要引入服务熔断机制,即为一种快速返回失败机制.-> Server5
 ```
+以上用到的技术如下
+* 网关:SpringCloudGetWay
+* 注册中心: SpringCloudAlibabaNacos
+* 微服务本体: SpringBoot
+* 远程调用: SpringCloudOpenFeign
+* 服务熔断: SpringCloudAlibabaSentinel
+* 分布式事务: SpringCloudAlibabaSeata
 
 ### Maven设置
 设置国内库:在`settings.xml`中的`<settings>`标签内部添加如下代码:
