@@ -4,37 +4,49 @@
 学习SpringCloud分布式程序开发和部署所创建的学习项目
 
 ### 分布式结构简介
+```mermaid
+graph TB
+    Start(开始) --> Open[打开冰箱门]
+    Open --> Put[把大象放进去]
+    Put[把大象放进去] --> IsFit{"冰箱小不小？"}
+    
+    IsFit -->|不小| Close[把冰箱门关上]
+    Close --> End(结束)
+        
+    IsFit -->|小| Change[换个大冰箱]
+    Change --> Open
+```
 
 ### Maven设置
 设置国内库:在`settings.xml`中的`<settings>`标签内部添加如下代码:
 ```xml
 <!--国内库-->
- <mirrors>
-     <mirror>
-         <id>alimaven</id>
-         <mirrorOf>central</mirrorOf>
-         <name>aliyun maven</name>
-         <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
-     </mirror>
-     <mirror>
-         <id>uk</id>
-         <mirrorOf>central</mirrorOf>
-         <name>UK Maven</name>
-         <url>http://uk.maven.org/maven2/</url>
-     </mirror>
-     <mirror>
-         <id>CN</id>
-         <mirrorOf>central</mirrorOf>
-         <name>OSChina Central</name>
-         <url>http://maven.oschina.net/content/groups/public/</url>
-     </mirror>
-     <mirror>
-         <id>nexus</id>
-         <mirrorOf>central</mirrorOf>
-         <name>Nexus Repository</name>
-         <url>http://repo.maven.apache.org/maven2</url>
-     </mirror>
- </mirrors>
+<mirrors>
+  <mirror>
+      <id>alimaven</id>
+      <mirrorOf>central</mirrorOf>
+      <name>aliyun maven</name>
+      <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+  </mirror>
+  <mirror>
+      <id>uk</id>
+      <mirrorOf>central</mirrorOf>
+      <name>UK Maven</name>
+      <url>http://uk.maven.org/maven2/</url>
+  </mirror>
+  <mirror>
+      <id>CN</id>
+      <mirrorOf>central</mirrorOf>
+      <name>OSChina Central</name>
+      <url>http://maven.oschina.net/content/groups/public/</url>
+  </mirror>
+  <mirror>
+      <id>nexus</id>
+      <mirrorOf>central</mirrorOf>
+      <name>Nexus Repository</name>
+      <url>http://repo.maven.apache.org/maven2</url>
+  </mirror>
+</mirrors>
 ```
 
 
@@ -70,32 +82,32 @@
    3. 将`dependencies`和`properties`整个删除,手动添加大件版本及依赖,此项目添加如下:
    ```xml
    <!--大件版本-->
-    <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spring-cloud.version>2023.0.3</spring-cloud.version>
-        <spring-cloud-alibaba.version>2023.0.3.2</spring-cloud-alibaba.version>
-    </properties>
-    <!--使用导入的方式添加cloud和alibaba-->
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.springframwork.cloud</groupId>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <version>${spring-cloud.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>com.alibaba.cloud</groupId>
-                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
-                <version>${spring-cloud-alibaba.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
+   <properties>
+     <maven.compiler.source>17</maven.compiler.source>
+     <maven.compiler.target>17</maven.compiler.target>
+     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+     <spring-cloud.version>2023.0.3</spring-cloud.version>
+     <spring-cloud-alibaba.version>2023.0.3.2</spring-cloud-alibaba.version>
+   </properties>
+   <!--使用导入的方式添加cloud和alibaba-->
+   <dependencyManagement>
+     <dependencies>
+         <dependency>
+             <groupId>org.springframwork.cloud</groupId>
+             <artifactId>spring-cloud-dependencies</artifactId>
+             <version>${spring-cloud.version}</version>
+             <type>pom</type>
+             <scope>import</scope>
+         </dependency>
+         <dependency>
+             <groupId>com.alibaba.cloud</groupId>
+             <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+             <version>${spring-cloud-alibaba.version}</version>
+             <type>pom</type>
+             <scope>import</scope>
+         </dependency>
+     </dependencies>
+   </dependencyManagement>
    ```
    到此,三大框架的版本已设置
 6. 创建services项目(模组)
