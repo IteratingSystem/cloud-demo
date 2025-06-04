@@ -5,10 +5,37 @@
 
 ### 分布式结构简介
 
-graph TB
-A
-B
-C
+### Maven设置
+设置国内库:在`settings.xml`中的`<settings>`标签内部添加如下代码:
+```xml
+<!--国内库-->
+ <mirrors>
+     <mirror>
+         <id>alimaven</id>
+         <mirrorOf>central</mirrorOf>
+         <name>aliyun maven</name>
+         <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+     </mirror>
+     <mirror>
+         <id>uk</id>
+         <mirrorOf>central</mirrorOf>
+         <name>UK Maven</name>
+         <url>http://uk.maven.org/maven2/</url>
+     </mirror>
+     <mirror>
+         <id>CN</id>
+         <mirrorOf>central</mirrorOf>
+         <name>OSChina Central</name>
+         <url>http://maven.oschina.net/content/groups/public/</url>
+     </mirror>
+     <mirror>
+         <id>nexus</id>
+         <mirrorOf>central</mirrorOf>
+         <name>Nexus Repository</name>
+         <url>http://repo.maven.apache.org/maven2</url>
+     </mirror>
+ </mirrors>
+```
 
 
 ### 框架版本

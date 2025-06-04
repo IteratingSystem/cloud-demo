@@ -1,6 +1,5 @@
 package com.engine;
 
-import com.alibaba.cloud.nacos.discovery.NacosDiscoveryClient;
 import com.alibaba.cloud.nacos.discovery.NacosServiceDiscovery;
 import com.alibaba.nacos.api.exception.NacosException;
 import org.junit.jupiter.api.Test;
