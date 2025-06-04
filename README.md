@@ -18,8 +18,7 @@ graph TB
     Service2 --> Server4((微服务4_假设卡住))
     Service3 --> Server5((微服务5))
     Server2 --> Remoting(远程调用)
-    Remoting -.远程调用(走注册中心服务发现).-> Gateway
-    Gateway --> Server5
+    Remoting -.远程调用(走注册中心服务发现,再到服务器再到微服务).-> Gateway
     Server1 --> server3
     Server3 -.卡住(服务雪崩,需要引入服务熔断机制).-> Server4
 ```
