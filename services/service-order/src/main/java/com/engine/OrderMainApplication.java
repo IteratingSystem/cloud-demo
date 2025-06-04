@@ -7,7 +7,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 /**
  * @Auther WenLong
  * @Date 2025/6/3 17:34
- * @Description
+ * @Description 订单服务
  **/
 @EnableDiscoveryClient
 @SpringBootApplication
