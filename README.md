@@ -18,19 +18,19 @@ graph TB
     Service2 --> Server3((微服务3))
     Service3 --> Server4((微服务4))
     Service4 --> Server5((微服务5_假设卡住))
-    Server1 --> Remoting(远程调用其它微服务)
-    Remoting -.走注册中心服务发现,再到服务器再到微服务.-> Nacos
-    Server2 -.多个分布式部署的微服务共同组成一共业务,需要使用分布式事务.-> Server3
-    Server3 -..-> Server4
-    Server4 -.被调用服务卡住,导致整条业务全部卡住,被称为服务雪崩,需要引入服务熔断机制,即为一种快速返回失败机制.-> Server5
 ```
 以上用到的技术如下
 * 网关:SpringCloudGetWay
+   * 用户只需要在浏览器访问固定的网址,即可获取到不同服务器上的服务
 * 注册中心: SpringCloudAlibabaNacos
+  * 微服务的注册与发现
 * 微服务本体: SpringBoot
 * 远程调用: SpringCloudOpenFeign
+  * 不同微服务之间的数据交互业务,需要用到远程调用,会通过注册中心发现服务
 * 服务熔断: SpringCloudAlibabaSentinel
+  * 当多个微服务组成一共业务的时候,其中一共微服务卡住,则整条业务链就会卡住,称为服务雪崩;为了避免服务雪崩,则需要在其中一个服务卡住的时候快速返回失败,避免卡住的情况,即服务熔断
 * 分布式事务: SpringCloudAlibabaSeata
+  * 当多个微服务组成一共业务的时候,引入事务急值,即为分布式事务
 
 ### Maven设置
 设置国内库:在`settings.xml`中的`<settings>`标签内部添加如下代码:
