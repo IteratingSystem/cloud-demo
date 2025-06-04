@@ -6,15 +6,19 @@
 ### 分布式结构简介
 ```mermaid
 graph TB
-    Start(开始) --> Open[打开冰箱门]
-    Open --> Put[把大象放进去]
-    Put[把大象放进去] --> IsFit{"冰箱小不小？"}
-    
-    IsFit -->|不小| Close[把冰箱门关上]
-    Close --> End(结束)
-        
-    IsFit -->|小| Change[换个大冰箱]
-    Change --> Open
+    User(用户) --> Browser[浏览器网址]
+    Browser --> Gateway[网关,注册中心,请求路由]
+    Gateway --> Service1[服务器1]
+    Gateway --> Service2[服务器2]
+    Gateway --> Service3[服务器3]
+    Gateway --> Service...[服务器...]
+    Service1 --> Server1[微服务1]
+    Service1 --> Server2[微服务2]
+    Service2 --> Server3[微服务3]
+    Service2 --> Server4[微服务4]
+    Service3 --> Server1[微服务4]
+    Service3 --> Server3[微服务4]
+    Server1 --> Server3
 ```
 
 ### Maven设置
