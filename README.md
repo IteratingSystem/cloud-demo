@@ -8,7 +8,7 @@
 graph TB
     User(用户) --> Browser[浏览器网址]
     Browser --> Gateway[网关]
-    Gateway -.> Nacos(注册中心)
+    Gateway -..-> Nacos(注册中心)
     Nacos --> Service1[服务器1]
     Nacos --> Service2[服务器2]
     Nacos --> Service3[服务器3]
