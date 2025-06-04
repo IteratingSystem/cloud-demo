@@ -12,16 +12,17 @@ graph TB
     Nacos --> Service1[服务器1]
     Nacos --> Service2[服务器2]
     Nacos --> Service3[服务器3]
-    Nacos --> OtherService[其它服务器]
+    Nacos --> Service4[服务器4]
     Service1 --> Server1((微服务1))
     Service1 --> Server2((微服务2))
     Service2 --> Server3((微服务3))
-    Service2 --> Server4((微服务4))
-    Service3 --> Server5((微服务5_假设卡住))
-    Server2 --> Remoting(远程调用其它微服务)
+    Service3 --> Server4((微服务4))
+    Service4 --> Server5((微服务5_假设卡住))
+    Server1 --> Remoting(远程调用其它微服务)
     Remoting -.走注册中心服务发现,再到服务器再到微服务.-> Nacos
-    Server1 -.多个分布式部署的微服务共同组成一共业务,需要使用分布式事务.-> Server3
-    Server3 -.被调用服务卡住,导致整条业务全部卡住,被称为服务雪崩,需要引入服务熔断机制,即为一种快速返回失败机制.-> Server5
+    Server2 -.多个分布式部署的微服务共同组成一共业务,需要使用分布式事务.-> Server3
+    Server3 -..-> Server4
+    Server4 -.被调用服务卡住,导致整条业务全部卡住,被称为服务雪崩,需要引入服务熔断机制,即为一种快速返回失败机制.-> Server5
 ```
 以上用到的技术如下
 * 网关:SpringCloudGetWay
