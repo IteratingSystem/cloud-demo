@@ -12,7 +12,7 @@ graph TB
     Nacos --> Service1[服务器1]
     Nacos --> Service2[服务器2]
     Nacos --> Service3[服务器3]
-    Nacos --> OtherService[服务器...]
+    Nacos --> OtherService[其它服务器]
     Service1 --> Server1((微服务1))
     Service1 --> Server2((微服务2))
     Service2 --> Server3((微服务3))
