@@ -12,13 +12,13 @@ graph TB
     Gateway --> Service2[服务器2]
     Gateway --> Service3[服务器3]
     Gateway --> Service...[服务器...]
-    Service1 --> Server1[微服务1]
-    Service1 --> Server2[微服务2]
-    Service2 --> Server3[微服务3]
-    Service2 --> Server4[微服务4]
-    Service3 --> Server1[微服务4]
-    Service3 --> Server3[微服务4]
-    Server1 --> Server3
+    Service1 --> Server1((微服务1))
+    Service1 --> Server2((微服务2))
+    Service2 --> Server3((微服务3))
+    Service2 --> Server4((微服务4))
+    Service3 --> Server1
+    Service3 --> Server5((微服务5))
+    Server2 -.远程调用.-> Server5
 ```
 
 ### Maven设置
