@@ -15,10 +15,13 @@ graph TB
     Service1 --> Server1((微服务1))
     Service1 --> Server2((微服务2))
     Service2 --> Server3((微服务3))
-    Service2 --> Server4((微服务4))
-    Service3 --> Server1
+    Service2 --> Server4((微服务4(假设卡住)))
     Service3 --> Server5((微服务5))
-    Server2 -.远程调用.-> Server5
+    Server2 --> Remoting(远程调用)
+    Remoting -.远程调用(走注册中心服务发现).-> Gateway
+    Gateway --> Server5
+    Server1 --> server3
+    Server3 -.卡住(服务雪崩,需要引入服务熔断机制).-> Server4
 ```
 
 ### Maven设置
