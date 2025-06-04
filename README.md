@@ -38,7 +38,7 @@ graph LR
     Server1(订单服务) -.1:获取商品服务可访问地址列表.-> Nacos(注册中心)
     Nacos -.2:返回商品服务列表.-> Server1
     Server1 -.3:选择访问地址.- Server1
-    Server1 -.4:发送请求.> Server2(商品服务)
+    Server1 -.4:发送请求.-> Server2(商品服务)
     Server2 -.5:处理请求.-> Server2
     Server2 -.6:返回数据.-> Server1
 ```
