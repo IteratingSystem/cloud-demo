@@ -27,6 +27,21 @@ graph TB
 * 微服务本体: SpringBoot
 * 远程调用: SpringCloudOpenFeign
   * 不同微服务之间的数据交互业务,需要用到远程调用,会通过注册中心发现服务
+  * 假设订单服务需要调用商品服务,示意图如下:
+```mermaid
+graph LR
+    Server1(订单服务) -.注册服务.-> Nacos(注册中心)
+    Server2(商品服务) -.注册服务.-> Nacos
+```
+```mermaid
+graph LR
+    Server1(订单服务) -.1:获取商品服务可访问地址列表.-> Nacos(注册中心)
+    Nacos -.2:返回商品服务列表.-> Server1
+    Server1 -.3:选择访问地址.- Server1
+    Server1 -.4:发送请求.> Server2(商品服务)
+    Server2 -.5:处理请求.-> Server2
+    Server2 -.6:返回数据.-> Server1
+```
 * 服务熔断: SpringCloudAlibabaSentinel
   * 当多个微服务组成一共业务的时候,其中一共微服务卡住,则整条业务链就会卡住,称为服务雪崩;为了避免服务雪崩,则需要在其中一个服务卡住的时候快速返回失败,避免卡住的情况,即服务熔断
 * 分布式事务: SpringCloudAlibabaSeata
