@@ -241,7 +241,6 @@ private Product getProductFromRemote(Long productId) {
     <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
 </dependency>
 ```
-
 ##### 负载均衡
 * 使用LoadBalancerClient来制作负载均衡功能,位于org.springframework.cloud.client.loadbalancer包下
 * 需要导入依赖
@@ -261,6 +260,27 @@ private Product getProductFromRemoteWithLoadBalancer(Long productId) {
     //String url = "http://" + choose.getHost() + ":" + choose.getPort() + "/product/" + productId;
     String url = choose.getUri() + "/product/" + productId;
     log.info("远程请求:{}", url);
+    //2.发送远程请求
+    Product product = restTemplate.getForObject(url, Product.class);
+    return product;
+}
+```
+##### 基于注解的负载均衡
+* 上面两个案例中使用restTemplate进行远程调用,它在config注册到BeanFactory,以实现自动注入
+* 只需要给restTemplate注册代码添加`@LoadBalanced`注解,则使其自动带有负载均衡功能,示例代码
+```java
+@Bean
+@LoadBalanced
+public RestTemplate restTemplate() {
+    return new RestTemplate();
+}
+```
+* 拥有@LoadBalanced后,使用它进行远程调用不需要传入具体ip地址的url,而是在传入带有服务名称的url,示例代码如下:
+```java
+//远程调用商品服务(注解负载均衡)
+private Product getProductFromRemoteWithLoadBalancerAnnotation(Long productId) {
+    //1.获取商品服务所在的url
+    String url = "http://service-product/product/" + productId;
     //2.发送远程请求
     Product product = restTemplate.getForObject(url, Product.class);
     return product;
