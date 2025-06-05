@@ -215,20 +215,51 @@ spring.cloud.nacos.server-addr=127.0.0.1:8848
 5. 直接启动微服务即可
 
 #### 服务发现及远程调用
-| 流程 | 内容        | 核心                   |
-|  --- |-----------|----------------------|
-| 步骤1 | 启动微服务     | SpringBoot微服务web项目启动 |
-| 步骤2 | 测试服务发现API | DiscoveryClient      |
-| 步骤3 | 测试服务发现API | NacosServiceDiscovery |
-
-远程调用示例代码:
+##### 无负载均衡
+* 使用DiscoveryClient或者NacosServiceDiscovery服务发现
+* 拼接url地址
+* 使用RestTemplate发送请求
+* 示例代码:
 ```java
-//远程调用商品服务
+//远程调用商品服务(无负载均衡)
 private Product getProductFromRemote(Long productId) {
-    //1.获取商品服务所在的ip+port
+    //1.获取商品服务所在的url
     List<ServiceInstance> instances = discoveryClient.getInstances("service-product");
-    ServiceInstance serviceInstance = instances.get(0); //取第一个服务用于测试,未做负载均衡
+    ServiceInstance serviceInstance = instances.get(0);
     String url = "http://" + serviceInstance.getHost() + ":" + serviceInstance.getPort() + "/product/" + productId;
+    log.info("远程请求:{}", url);
+    //2.发送远程请求
+    Product product = restTemplate.getForObject(url, Product.class);
+    return product;
+}
+```
+* NacosServiceDiscovery与DiscoveryClient用法一致,区别在于DiscoveryClient它由SpringBoot提供,不需要额外依赖;NacosServiceDiscovery则需要以下依赖:
+```xml
+<!--服务注册与发现-->
+<dependency>
+    <groupId>com.alibaba.cloud</groupId>
+    <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+</dependency>
+```
+
+##### 负载均衡
+* 使用LoadBalancerClient来制作负载均衡功能,位于org.springframework.cloud.client.loadbalancer包下
+* 需要导入依赖
+```xml
+<!--负载均衡-->
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-loadbalancer</artifactId>
+</dependency>
+```
+* 与上面的DiscoveryClient使用方法类似,示例代码:
+```java
+//远程调用商品服务(负载均衡)
+private Product getProductFromRemoteWithLoadBalancer(Long productId) {
+    //1.获取商品服务所在的url
+    ServiceInstance choose = loadBalancerClient.choose("service-product");
+    //String url = "http://" + choose.getHost() + ":" + choose.getPort() + "/product/" + productId;
+    String url = choose.getUri() + "/product/" + productId;
     log.info("远程请求:{}", url);
     //2.发送远程请求
     Product product = restTemplate.getForObject(url, Product.class);
