@@ -308,46 +308,82 @@ spring.config.import=nacos:service-order.properties
       1. 使用`@Value("${key}")`注解在属性上可自动获取
       2. 若要做到获取实时修改的配置,则需要在类上加`@RefreshScope`注解
       3. 示例代码:
-```java
-
-@RefreshScope
-@RestController
-public class OrderController {
-    @Value("${order.timeout}")
-    String orderTimeout;
-    @Value("${order.auto-confirm}")
-    String orderAutoConfirm;
-
-    @GetMapping("/config")
-    public String config(){
-        return "orderTimeout:" + orderTimeout +";"+"orderAutoConfirm:" + orderAutoConfirm;
-    }
-}
-```
+        ```java
+        
+        @RefreshScope
+        @RestController
+        public class OrderController {
+            @Value("${order.timeout}")
+            String orderTimeout;
+            @Value("${order.auto-confirm}")
+            String orderAutoConfirm;
+        
+            @GetMapping("/config")
+            public String config(){
+                return "orderTimeout:" + orderTimeout +";"+"orderAutoConfirm:" + orderAutoConfirm;
+            }
+        }
+        ```
    * 方法二:使用`@ConfigurationProperties`
       * 将配置的属性抽象为一个实体类,创建属性对象,并为其添加`@ConfigurationProperties`,`@Data`,`@Component`注解,示例代码:
-```java
-@Data   //需要getter setter
-@Component  //用于自动注入
-@ConfigurationProperties(prefix = "order")  //核心注解,指定前缀
-public class OrderProperties {
-    private String timeout;
-    private String autoConfirm; //order.auto-confirm 由于指定了前缀则不需要写order,'-'号使用驼峰命名即可映射
-}
-```
-```java
-@RestController
-public class OrderController {
-    @Autowired
-    OrderProperties orderProperties;
-
-    @GetMapping("/config")
-    public String config(){
-        return "orderTimeout:" + orderProperties.getTimeout()+";"+"orderAutoConfirm:" + orderProperties.getAutoConfirm();
+        ```java
+        @Data   //需要getter setter
+        @Component  //用于自动注入
+        @ConfigurationProperties(prefix = "order")  //核心注解,指定前缀
+        public class OrderProperties {
+            private String timeout;
+            private String autoConfirm; //order.auto-confirm 由于指定了前缀则不需要写order,'-'号使用驼峰命名即可映射
+        }
+        ```
+        ```java
+        @RestController
+        public class OrderController {
+            @Autowired
+            OrderProperties orderProperties;
+        
+            @GetMapping("/config")
+            public String config(){
+                return "orderTimeout:" + orderProperties.getTimeout()+";"+"orderAutoConfirm:" + orderProperties.getAutoConfirm();
+            }
+        }
+        ```
+5. 监听`Nacos`配置文件变化
+   1. 使用`ApplicationRunner`创建一次性任务,它会在代码启动时执行 
+   2. 为`NacosConfigManager`设置监听
+   3. 示例代码(卸载微服务的Application启动类中):
+    ```java
+    //1. 项目启动就监听Nacos配置文件的变化
+    //2. 拿到变化的值
+    //3. 模拟邮件通知
+    @Bean   //Bean后可直接使用BeanFactory内部已有的工具作为入参
+    ApplicationRunner applicationRunner(NacosConfigManager nacosConfigManager) {
+    //        return new ApplicationRunner() {
+    //            @Override
+    //            public void run(ApplicationArguments args) throws Exception {
+    //            }
+    //        };
+        //简写
+        return args -> {
+            System.out.println("Application Started,项目启动");
+            ConfigService configService = nacosConfigManager.getConfigService();    //获取服务
+            configService.addListener("service-order.properties", "DEFAULT_GROUP", new Listener() {
+                //线程池
+                @Override
+                public Executor getExecutor() {
+                    //需要new一个固定大小的线程池
+                    return Executors.newFixedThreadPool(4);
+                }
+                //监听接收变化配置
+                @Override
+                public void receiveConfigInfo(String configInfo) {
+                    System.out.println("变化配置信息: "+configInfo);
+                    System.out.println("发送通知...");
+                }
+            });
+        };
     }
-}
-```
+    ```
 
-5. 假设Nacos网页中没有配置好内容,同时在`application.properties`导入了那个未配置的配置文件,在启动的时候会报错,有如下两种方式可以规避报错
+6. 假设Nacos网页中没有配置好内容,同时在`application.properties`导入了那个未配置的配置文件,在启动的时候会报错,有如下两种方式可以规避报错
    1. 关闭启动校验导入内容,在`application.properties`添加`spring.cloud.nacos.config.import-check.enabled=false`即可
    2. 设置nacos配置文件导入为可选的,需要将`spring.config.import=nacos:service-order.properties`改为`spring.config.import=optional:nacos:service-order.properties`
