@@ -242,7 +242,7 @@ private Product getProductFromRemote(Long productId) {
 </dependency>
 ```
 ##### 负载均衡
-* 使用LoadBalancerClient来制作负载均衡功能,位于org.springframework.cloud.client.loadbalancer包下
+* 使用`LoadBalancerClient`来制作负载均衡功能,位于`org.springframework.cloud.client.loadbalancer`包下
 * 需要导入依赖
 ```xml
 <!--负载均衡-->
@@ -251,7 +251,7 @@ private Product getProductFromRemote(Long productId) {
     <artifactId>spring-cloud-starter-loadbalancer</artifactId>
 </dependency>
 ```
-* 与上面的DiscoveryClient使用方法类似,示例代码:
+* 与上面的`DiscoveryClient`使用方法类似,示例代码:
 ```java
 //远程调用商品服务(负载均衡)
 private Product getProductFromRemoteWithLoadBalancer(Long productId) {
@@ -266,8 +266,8 @@ private Product getProductFromRemoteWithLoadBalancer(Long productId) {
 }
 ```
 ##### 基于注解的负载均衡
-* 上面两个案例中使用restTemplate进行远程调用,它在config注册到BeanFactory,以实现自动注入
-* 只需要给restTemplate注册代码添加`@LoadBalanced`注解,则使其自动带有负载均衡功能,示例代码
+* 上面两个案例中使用`restTemplate`进行远程调用,它在config注册到`BeanFactory`,以实现自动注入
+* 只需要给`restTemplate`注册代码添加`@LoadBalanced`注解,则使其自动带有负载均衡功能,示例代码
 ```java
 @Bean
 @LoadBalanced
@@ -275,7 +275,7 @@ public RestTemplate restTemplate() {
     return new RestTemplate();
 }
 ```
-* 拥有@LoadBalanced后,使用它进行远程调用不需要传入具体ip地址的url,而是在传入带有服务名称的url,示例代码如下:
+* 拥有@LoadBalanced后,使用它进行远程调用不需要传入具体ip地址的url,而是在传入带有微服务名称的url,示例代码如下:
 ```java
 //远程调用商品服务(注解负载均衡)
 private Product getProductFromRemoteWithLoadBalancerAnnotation(Long productId) {
@@ -286,3 +286,25 @@ private Product getProductFromRemoteWithLoadBalancerAnnotation(Long productId) {
     return product;
 }
 ```
+##### 知识补充
+* Nacos注册中心宕机后假设微服务被调用过,则还能继续调用;如果微服务没被调用过,则无法调用;原因是注册中心存在服务列表缓存,调用过的微服务信息则会在列表缓存中,如果注册中心宕机了,负载均很依旧会从缓存中取得目标服务地址.
+
+### Nacos配置中心
+1. 在Nacos网页页面新增配置,填入`Data ID`与配置内容,`Data ID`一般命名为`微服务名.properties`,配置内容则自定义,如`order.timeout=30min`
+2. 代码添加配置中心依赖
+```xml
+<!--配置中心-->
+<dependency>
+    <groupId>com.alibaba.cloud</groupId>
+    <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+</dependency>
+```
+2. 导入Nacos配置到application.properties,即在application.properties中新增
+```properties
+spring.config.import=nacos:service-order.properties
+```
+3. 在代码中获取配置值,使用`@Value("${key}")`注解在属性上可自动获取
+4. 若要做到获取实时修改的配置,则需要在类上加`@RefreshScope`注解
+5. 假设Nacos网页中没有配置好内容,同时在`application.properties`导入了那个未配置的配置文件,在启动的时候会报错,有如下两种方式可以规避报错
+   1. 关闭启动校验导入内容,在`application.properties`添加`spring.cloud.nacos.config.import-check.enabled=false`即可
+   2. 设置nacos配置文件导入为可选的,需要将`spring.config.import=nacos:service-order.properties`改为`spring.config.import=optional:nacos:service-order.properties`
