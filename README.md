@@ -212,7 +212,8 @@ server.port=8000
 #Nacos连接地址
 spring.cloud.nacos.server-addr=127.0.0.1:8848
 ```
-5. 直接启动微服务即可
+5. 开启服务发现,在启动类中添加注解`@EnableDiscoveryClient`
+6. 直接启动微服务即可
 
 #### 服务发现及远程调用
 ##### 无负载均衡
@@ -384,6 +385,72 @@ spring.config.import=nacos:service-order.properties
     }
     ```
 
-6. 假设Nacos网页中没有配置好内容,同时在`application.properties`导入了那个未配置的配置文件,在启动的时候会报错,有如下两种方式可以规避报错
+6. 假设`Nacos`网页中没有配置好内容,同时在`application.properties`导入了那个未配置的配置文件,在启动的时候会报错,有如下两种方式可以规避报错
    1. 关闭启动校验导入内容,在`application.properties`添加`spring.cloud.nacos.config.import-check.enabled=false`即可
-   2. 设置nacos配置文件导入为可选的,需要将`spring.config.import=nacos:service-order.properties`改为`spring.config.import=optional:nacos:service-order.properties`
+   2. 设置`Nacos`配置文件导入为可选的,需要将`spring.config.import=nacos:service-order.properties`改为`spring.config.import=optional:nacos:service-order.properties`
+7. 假设`application.properties`和`Nacos`中都配置了相同的内容,则`Nacos`中的生效,如果导入的多个配置文件中有相同的配置,则先声明的配置优先;`即外部优先,先导入优先`
+8. `Nacos`数据隔离
+   1. 从此开始application.properties改为application.yml
+   2. `Nacos`提供了:命名空间,组和DataID的功能
+      1. namespace命名空间:用来区分开发环境,如`dev`,`prod`,`test`,配置文件中填入的是命名空间的id
+      2. group组:用来区分微服务,取名可以以服务名称来指定
+      3. DataID:具体的配置文件名
+   3. 配置示例:
+    ```yaml
+    server:
+      port: 8000
+    spring:
+      application:
+        name: service-order
+      cloud:
+        nacos:
+          server-addr: 127.0.0.1:8848
+          config:
+            namespace: dev  #开发环境,命名空间id
+            group: service-order  #服务
+      config:
+        import: #需要加载的具体配置文件
+          - nacos:common.properties 
+          - nacos:database.properties
+    ```
+   4. 这种方式可以将不同的开发环境与微服务区分开,但是引出一个问题:当不同的开发环境需要导入的配置文件不同时,则需要动态配置导入部分;需要使用到activate配置,代码如下
+```yaml
+server:
+  port: 8000
+spring:
+  profiles:
+    active: dev
+  application:
+    name: service-order
+  cloud:
+    nacos:
+      server-addr: 127.0.0.1:8848
+      config:
+        namespace: ${spring.profiles.active:public}  #开发环境,命名空间id
+        group: service-order  #服务
+
+---
+spring:
+  config:
+    import: #需要加载的具体配置文件
+      - nacos:common.properties
+      - nacos:database.properties
+    activate:
+      on-profile: dev
+---
+spring:
+  config:
+    import: #需要加载的具体配置文件
+      - nacos:common.properties
+      - nacos:database.properties
+    activate:
+      on-profile: test
+---
+spring:
+  config:
+    import: #需要加载的具体配置文件
+      - nacos:common.properties
+      - nacos:database.properties
+    activate:
+      on-profile: prod
+```

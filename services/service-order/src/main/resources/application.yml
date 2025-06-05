@@ -1,0 +1,42 @@
+server:
+  port: 8000
+spring:
+  profiles:
+    active: prod
+  application:
+    name: service-order
+  cloud:
+    nacos:
+      server-addr: 127.0.0.1:8848
+      config:
+        namespace: ${spring.profiles.active:public}  #开发环境
+        group: service-order  #服务
+
+---
+spring:
+  config:
+    import: #需要加载的具体配置文件
+      - nacos:common.properties
+      - nacos:database.properties
+    activate:
+      on-profile: dev
+---
+spring:
+  config:
+    import: #需要加载的具体配置文件
+      - nacos:common.properties
+      - nacos:database.properties
+    activate:
+      on-profile: test
+---
+spring:
+  config:
+    import: #需要加载的具体配置文件
+      - nacos:common.properties
+      - nacos:database.properties
+    activate:
+      on-profile: prod
+
+
+
+

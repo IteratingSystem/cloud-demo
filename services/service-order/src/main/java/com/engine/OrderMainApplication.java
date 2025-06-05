@@ -50,7 +50,8 @@ public class OrderMainApplication {
                 //监听接收变化配置
                 @Override
                 public void receiveConfigInfo(String configInfo) {
-                    System.out.println("变化配置信息: "+configInfo);
+                    System.out.println("变化配置信息:");
+                    System.out.println(configInfo);
                     System.out.println("发送通知...");
                 }
             });

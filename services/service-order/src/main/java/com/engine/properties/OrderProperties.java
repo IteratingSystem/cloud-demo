@@ -17,4 +17,5 @@ import org.springframework.stereotype.Component;
 public class OrderProperties {
     private String timeout;
     private String autoConfirm;
+    private String url;
 }
