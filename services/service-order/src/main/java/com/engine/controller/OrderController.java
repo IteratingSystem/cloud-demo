@@ -1,6 +1,7 @@
 package com.engine.controller;
 
-import com.engine.bean.Order;
+
+import com.engine.order.bean.Order;
 import com.engine.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

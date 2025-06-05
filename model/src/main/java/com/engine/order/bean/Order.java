@@ -1,5 +1,6 @@
-package com.engine.bean;
+package com.engine.order.bean;
 
+import com.engine.product.bean.Product;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -17,5 +18,5 @@ public class Order {
     private Long userId;
     private String nickName;
     private String address;
-    private List<Object> productList;
+    private List<Product> productList;
 }

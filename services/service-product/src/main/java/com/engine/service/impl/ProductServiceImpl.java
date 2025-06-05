@@ -1,6 +1,7 @@
 package com.engine.service.impl;
 
-import com.engine.bean.Product;
+
+import com.engine.product.bean.Product;
 import com.engine.service.ProductService;
 import org.springframework.stereotype.Service;
 

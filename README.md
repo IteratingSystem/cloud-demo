@@ -96,10 +96,10 @@ graph LR
 
 ### 工程结构
 * cloud-demo //控制框架版本
-   * services  //所有的微服务
-      * service-order
-      * service-product
-   * 
+    * model //公共模型层,用于存放所有的模型实体,由于不同服务之间存在远程调用的关系,所以需要用到不同服务的对象实体模型,故而将其提出为一个model
+    * services  //所有的微服务
+       * service-order
+       * service-product
 
 ### 创建项目
 1. 新增一个工程
@@ -214,9 +214,24 @@ spring.cloud.nacos.server-addr=127.0.0.1:8848
 ```
 5. 直接启动微服务即可
 
-#### 服务发现
+#### 服务发现及远程调用
 | 流程 | 内容        | 核心                   |
 |  --- |-----------|----------------------|
 | 步骤1 | 启动微服务     | SpringBoot微服务web项目启动 |
 | 步骤2 | 测试服务发现API | DiscoveryClient      |
 | 步骤3 | 测试服务发现API | NacosServiceDiscovery |
+
+远程调用示例代码:
+```java
+//远程调用商品服务
+private Product getProductFromRemote(Long productId) {
+    //1.获取商品服务所在的ip+port
+    List<ServiceInstance> instances = discoveryClient.getInstances("service-product");
+    ServiceInstance serviceInstance = instances.get(0); //取第一个服务用于测试,未做负载均衡
+    String url = "http://" + serviceInstance.getHost() + ":" + serviceInstance.getPort() + "/product/" + productId;
+    log.info("远程请求:{}", url);
+    //2.发送远程请求
+    Product product = restTemplate.getForObject(url, Product.class);
+    return product;
+}
+```

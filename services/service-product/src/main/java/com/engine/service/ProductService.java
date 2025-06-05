@@ -1,6 +1,7 @@
 package com.engine.service;
 
-import com.engine.bean.Product;
+
+import com.engine.product.bean.Product;
 
 /**
  * @Auther WenLong

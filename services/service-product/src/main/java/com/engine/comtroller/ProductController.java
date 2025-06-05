@@ -1,6 +1,7 @@
 package com.engine.comtroller;
 
-import com.engine.bean.Product;
+
+import com.engine.product.bean.Product;
 import com.engine.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
