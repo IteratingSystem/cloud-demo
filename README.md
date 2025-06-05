@@ -167,7 +167,7 @@ graph LR
 2. 在src/test(/java)中添加注册类即可,包名需要与微服务启动类包名一致,注册类需要添加`@SpringBootTest`注解
 
 
-### 注册中心Nacos
+### Nacos注册中心,服务注册与发现
 #### 服务注册
 * 去官网下载Nacos
 
@@ -289,7 +289,7 @@ private Product getProductFromRemoteWithLoadBalancerAnnotation(Long productId) {
 ##### 知识补充
 * Nacos注册中心宕机后假设微服务被调用过,则还能继续调用;如果微服务没被调用过,则无法调用;原因是注册中心存在服务列表缓存,调用过的微服务信息则会在列表缓存中,如果注册中心宕机了,负载均很依旧会从缓存中取得目标服务地址.
 
-### Nacos配置中心
+### Nacos配置中心读写配置属性
 1. 在Nacos网页页面新增配置,填入`Data ID`与配置内容,`Data ID`一般命名为`微服务名.properties`,配置内容则自定义,如`order.timeout=30min`
 2. 代码添加配置中心依赖
 ```xml
@@ -299,12 +299,55 @@ private Product getProductFromRemoteWithLoadBalancerAnnotation(Long productId) {
     <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
 </dependency>
 ```
-2. 导入Nacos配置到application.properties,即在application.properties中新增
+3. 导入Nacos配置到application.properties,即在application.properties中新增
 ```properties
 spring.config.import=nacos:service-order.properties
 ```
-3. 在代码中获取配置值,使用`@Value("${key}")`注解在属性上可自动获取
-4. 若要做到获取实时修改的配置,则需要在类上加`@RefreshScope`注解
+4. 读取配置属性
+   * 方法一:根据`@RefreshScope`与`@Value("${key}")`动态取
+      1. 使用`@Value("${key}")`注解在属性上可自动获取
+      2. 若要做到获取实时修改的配置,则需要在类上加`@RefreshScope`注解
+      3. 示例代码:
+```java
+
+@RefreshScope
+@RestController
+public class OrderController {
+    @Value("${order.timeout}")
+    String orderTimeout;
+    @Value("${order.auto-confirm}")
+    String orderAutoConfirm;
+
+    @GetMapping("/config")
+    public String config(){
+        return "orderTimeout:" + orderTimeout +";"+"orderAutoConfirm:" + orderAutoConfirm;
+    }
+}
+```
+   * 方法二:使用`@ConfigurationProperties`
+      * 将配置的属性抽象为一个实体类,创建属性对象,并为其添加`@ConfigurationProperties`,`@Data`,`@Component`注解,示例代码:
+```java
+@Data   //需要getter setter
+@Component  //用于自动注入
+@ConfigurationProperties(prefix = "order")  //核心注解,指定前缀
+public class OrderProperties {
+    private String timeout;
+    private String autoConfirm; //order.auto-confirm 由于指定了前缀则不需要写order,'-'号使用驼峰命名即可映射
+}
+```
+```java
+@RestController
+public class OrderController {
+    @Autowired
+    OrderProperties orderProperties;
+
+    @GetMapping("/config")
+    public String config(){
+        return "orderTimeout:" + orderProperties.getTimeout()+";"+"orderAutoConfirm:" + orderProperties.getAutoConfirm();
+    }
+}
+```
+
 5. 假设Nacos网页中没有配置好内容,同时在`application.properties`导入了那个未配置的配置文件,在启动的时候会报错,有如下两种方式可以规避报错
    1. 关闭启动校验导入内容,在`application.properties`添加`spring.cloud.nacos.config.import-check.enabled=false`即可
    2. 设置nacos配置文件导入为可选的,需要将`spring.config.import=nacos:service-order.properties`改为`spring.config.import=optional:nacos:service-order.properties`

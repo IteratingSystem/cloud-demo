@@ -2,6 +2,7 @@ package com.engine.controller;
 
 
 import com.engine.order.bean.Order;
+import com.engine.properties.OrderProperties;
 import com.engine.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,21 +17,21 @@ import org.springframework.web.bind.annotation.RestController;
  * @Description 订单接口
  **/
 
-@RefreshScope
+//@RefreshScope
 @RestController
 public class OrderController {
     @Autowired
     OrderService orderService;
-
-
-    @Value("${order.timeout}")
-    String orderTimeout;
-    @Value("${order.auto-confirm}")
-    String orderAutoConfirm;
+    @Autowired
+    OrderProperties orderProperties;
+//    @Value("${order.timeout}")
+//    String orderTimeout;
+//    @Value("${order.auto-confirm}")
+//    String orderAutoConfirm;
 
     @GetMapping("/config")
     public String config(){
-        return "orderTimeout:" + orderTimeout+";"+"orderAutoConfirm:" + orderAutoConfirm;
+        return "orderTimeout:" + orderProperties.getTimeout()+";"+"orderAutoConfirm:" + orderProperties.getAutoConfirm();
     }
 
     //创建订单
