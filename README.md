@@ -546,9 +546,9 @@ Retryer  feignRetryer() {
 ```mermaid
 graph LR
 ServiceA[服务A] --> Req(请求拦截器)
-Req -请求定制修改-> ServiceB[服务B]
+Req -->|请求定制修改| ServiceB[服务B]
 ServiceB --> Rep(响应拦截器)
-Rep -响应数据预处理-> ServiceA
+Rep -->|响应数据预处理| ServiceA
 ```
    1. 请求拦截器`RequestInterceptor`:在OpenFeign想其它服务发送请求时,请求发送前拦截,可以对请求数据定制修改后发送给目标服务
    2. 响应拦截器`ResponseInterceptor`:在OpenFeign获取到响应的时候,可以对响应数据做出修改再返回给调用服务
