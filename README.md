@@ -500,3 +500,69 @@ public interface testApi {
         return Logger.Level.FULL;
     }
     ```
+5. OpenFeign超时控制
+   1. 使用场景:当一个服务调用另一个服务接口,同时另一个服务接口异常,无法返回数据时,会造成阻塞,并发量大的时候则造成服务雪崩,使用超时控制来设置调用的等待时间
+    ```mermaid
+    graph TB
+    Feign(OpenFeign远程调用) --> Time{等待时间}
+    Time --> NTimeout[未超时]
+    NTimeout --> Success[返回正确结果]
+    Time --> Timeout[超时]
+    Timeout --> Stop[中断调用]
+    Stop --> Failed[返回错误信息,超时控制达到此效果]
+    Stop --> FData[返回兜底数据,需要熔断机制,后面会接触到]
+    ```
+   2. 超时时间分为`connectTime`连接超时和`readTimeout`读取超时,分别为连接阶段以及建立连接后的获取数据返回阶段的时限,超时时间分别默认为10秒与60秒
+   3. 具体配置,其中指定Feign客户端的名字来源于Feign客户端注解的Value值,即`@FeignClient(value = "service-product")`,假设注解中配置了`contextId`,则使用`contextId`的值作为名字
+    ```yaml
+    spring:
+      cloud:
+        openfeign:
+          client:
+            config:
+              #默认配置
+              default:
+                logger-level: full
+                connect-timeout: 1000
+                read-timeout: 2000
+              #默认配置,指定Feign客户端设置
+              service-product:
+                logger-level: full
+                connect-timeout: 3000
+                read-timeout: 5000
+    ```
+5. OpenFeign重试机制
+* 超时机制中,请求时间过长会导致返回异常,重试机制则为异常后自动重试请求,默认是never也就是从不重试
+* 重试器需要配置:`最大重试请求次数,初次失败后触发重试时间间隔,最大重试时间间隔`;
+* 每一次重试请求的时间间隔为:`上一次的间隔时间*1.5,同时不超过最大时间间隔`
+* 在配置类中配置重试器:
+```java
+@Bean
+Retryer  feignRetryer() {
+    return new Retryer.Default();
+}
+```
+6. OpenFeign拦截器
+```mermaid
+graph LR
+ServiceA[服务A] --> Req(请求拦截器)
+Req -请求定制修改-> ServiceB[服务B]
+ServiceB --> Rep(响应拦截器)
+Rep -响应数据预处理-> ServiceA
+```
+   1. 请求拦截器`RequestInterceptor`:在OpenFeign想其它服务发送请求时,请求发送前拦截,可以对请求数据定制修改后发送给目标服务
+   2. 响应拦截器`ResponseInterceptor`:在OpenFeign获取到响应的时候,可以对响应数据做出修改再返回给调用服务
+   3. 编写请求拦截器,新建类实现`RequestInterceptor`接口,使用`@Component`添加到容器中即可.
+   4. 模拟添加Token示例代码:
+```java
+@Component
+public class XTokenRequestInterceptor implements RequestInterceptor {
+    @Override
+    public void apply(RequestTemplate requestTemplate) {
+        requestTemplate.header("X-Token", UUID.randomUUID().toString());
+    }
+}
+```
+6. OpenFeign兜底数据
+* 当远程调用失败后,不仅可以使用`重试机制`,也可以返回预设的`兜底数据`
+* 

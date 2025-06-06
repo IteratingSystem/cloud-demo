@@ -1,0 +1,15 @@
+spring:
+  cloud:
+    openfeign:
+      client:
+        config:
+          #默认配置
+          default:
+            logger-level: full
+            connect-timeout: 1000
+            read-timeout: 2000
+          #默认配置,指定Feign客户端设置
+          service-product:
+            logger-level: full
+            connect-timeout: 3000
+            read-timeout: 5000
