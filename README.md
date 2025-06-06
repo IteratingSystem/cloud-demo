@@ -454,3 +454,18 @@ spring:
     activate:
       on-profile: prod
 ```
+
+### Feign远程调用
+1. 使用`@EnableFeignClients`开启Feign远程调用客户端功能,放在启动类上(Application)
+2. 创建Feign客户端
+   1. 创建一个接口
+   2. 为接口添加`@FeignClient(value = "service-product")`注解表示此接口为一个Feign客户端,value内容则是目标服务的名字
+   3. 添加接口,可直接将目标服务的接口复制过来使用(去掉方法体),示例代码如下:
+    ```java
+    @FeignClient(value = "service-product")
+    public interface ProductFeignClient {
+        @GetMapping("/product/{id}")
+        Product getProduct(@PathVariable("id") Long productId);
+    }
+    ```
+3. 直接调用此接口的方法即可完成远程调用,同时自动负载均衡

@@ -1,6 +1,7 @@
 package com.engine.service.impl;
 
 
+import com.engine.feign.ProductFeignClient;
 import com.engine.order.bean.Order;
 import com.engine.product.bean.Product;
 import com.engine.service.OrderService;
@@ -26,6 +27,8 @@ import java.util.List;
 public class OrderServiceImpl implements OrderService {
 
     @Autowired
+    ProductFeignClient productFeignClient;
+    @Autowired
     DiscoveryClient discoveryClient;
     @Autowired
     LoadBalancerClient loadBalancerClient;
@@ -34,8 +37,8 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order createOrder(Long productId, Long userId) {
-        Product product = getProductFromRemoteWithLoadBalancerAnnotation(productId);
-
+//        Product product = getProductFromRemoteWithLoadBalancerAnnotation(productId);
+        Product product = productFeignClient.getProduct(productId);
         Order order = new Order();
         order.setId(1L);
         BigDecimal totalAmount = product.getPrice().multiply(BigDecimal.valueOf(product.getNum()));

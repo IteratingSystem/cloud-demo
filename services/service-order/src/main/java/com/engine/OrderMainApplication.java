@@ -8,6 +8,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 
 import java.util.concurrent.Executor;
@@ -18,6 +19,8 @@ import java.util.concurrent.Executors;
  * @Date 2025/6/3 17:34
  * @Description 订单服务
  **/
+//开启feign客户端
+@EnableFeignClients
 @EnableDiscoveryClient
 @SpringBootApplication
 public class OrderMainApplication {
