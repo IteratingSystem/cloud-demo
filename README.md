@@ -455,17 +455,48 @@ spring:
       on-profile: prod
 ```
 
-### Feign远程调用
-1. 使用`@EnableFeignClients`开启Feign远程调用客户端功能,放在启动类上(Application)
-2. 创建Feign客户端
-   1. 创建一个接口
-   2. 为接口添加`@FeignClient(value = "service-product")`注解表示此接口为一个Feign客户端,value内容则是目标服务的名字
-   3. 添加接口,可直接将目标服务的接口复制过来使用(去掉方法体),示例代码如下:
+### OpenFeign远程调用
+1. 自身业务之间微服务的远程调用
+   1. 使用`@EnableFeignClients`开启Feign远程调用客户端功能,放在启动类上(Application)
+   2. 创建Feign客户端
+      1. 创建一个接口
+      2. 为接口添加`@FeignClient(value = "service-product")`注解表示此接口为一个Feign客户端,value内容则是目标服务的名字
+      3. 添加接口,可直接将目标服务的接口复制过来使用(去掉方法体),示例代码如下:
+       ```java
+       @FeignClient(value = "service-product")
+       public interface ProductFeignClient {
+           @GetMapping("/product/{id}")
+           Product getProduct(@PathVariable("id") Long productId);
+       }
+       ```
+   3. 直接调用此接口的方法即可完成远程调用,同时自动负载均衡
+2. 第三方API的远程调用
+* 和上面自身调用使用方法一致,区别在于`@FeignClient()`不光要指定`value`,还需要指定目标的`url`,例如:
+```java
+@FeignClient(value = "customName",url = "http://xxx.xxxx.com")
+public interface testApi {
+    @PostMapping("/xxxx/xxxx")
+    Product getData(@RequestHeader("header1") Strring header1,
+                    @RequestHeader("token") Strring token,
+                    @RequestParam("dataKey") String dataKey,
+                    @RequestBody("user") User user);
+}
+```
+* 传入参数使用不同的注解控制其再请求协议中的位置,比如`@RequestHeader``@RequestParam``@RequestBody`
+3. 客户端负载均衡与服务端负载均衡的区别
+   1. 客户端负载均衡表示Feign客户端调用自身其它微服务时,会先到注册中心,确定好目标后调用;即为`发起调用的这一端,自己根据负载均衡算法选择对方的地址进行调用,负载均很发生在客户端`
+   2. 服务端负载均很表示Feign请求第三方API,`负载均衡由被调用服务端负责,实现数据返回`
+4. Feign日志
+   1. 配置文件中编辑日志级别,内容为指定特定包或者类的日志级别:
+    ```yaml
+    logging:
+      level:
+        com.engine.feign: debug
+    ```
+   2. 在配置类中添加Feign的全记录组件
     ```java
-    @FeignClient(value = "service-product")
-    public interface ProductFeignClient {
-        @GetMapping("/product/{id}")
-        Product getProduct(@PathVariable("id") Long productId);
+    @Bean
+    Logger.Level feignLoggerLevel() {
+        return Logger.Level.FULL;
     }
     ```
-3. 直接调用此接口的方法即可完成远程调用,同时自动负载均衡

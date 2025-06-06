@@ -1,5 +1,7 @@
 server:
   port: 8000
+
+
 spring:
   profiles:
     active: prod
@@ -11,6 +13,12 @@ spring:
       config:
         namespace: ${spring.profiles.active:public}  #开发环境
         group: service-order  #服务
+
+
+logging:
+  level:
+    com.engine.feign: debug
+
 
 ---
 spring:
