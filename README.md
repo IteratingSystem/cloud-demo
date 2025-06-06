@@ -565,4 +565,34 @@ public class XTokenRequestInterceptor implements RequestInterceptor {
 ```
 6. OpenFeign兜底数据
 * 当远程调用失败后,不仅可以使用`重试机制`,也可以返回预设的`兜底数据`
-* 
+* 实现此功能需要导入`sentinel`熔断机制依赖,以下是具体流程
+  1. 导入`sentinel`依赖
+    ```xml
+    <!--sentinel熔断机制-->
+    <dependency>
+        <groupId>com.alibaba.cloud</groupId>
+        <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
+    </dependency>
+    ```
+  2. 配置文件中开启`sentinel`熔断机制
+    ```yaml
+    feign:
+      sentinel:
+        enabled: true
+    ```
+  3. 创建一个类,实现原本就已经存在的Feign客户端(Feign客户端本质上是一个接口),并使用`@Component`添加到容器中,其内部的所有实现方法都在于构建一个兜底的返回数据
+    ```java
+    @Component
+    public class ProductFeignClientFallback implements ProductFeignClient {
+        @Override
+        public Product getProduct(Long productId) {
+            Product product = new Product();
+            product.setId(666L);
+            product.setPrice(new BigDecimal(0));
+            product.setProductName("兜底数据");
+            product.setNum(1);
+            return product;
+        }
+    }
+    ```
+   4. 在Feign客户端类的注解中添加`fallback`属性指向兜底类即可完成:`@FeignClient(value = "service-product",fallback = ProductFeignClientFallback.class )`

@@ -25,8 +25,8 @@ public class OrderConfig {
         return Logger.Level.FULL;
     }
 
-    @Bean
-    Retryer  feignRetryer() {
-        return new Retryer.Default();
-    }
+//    @Bean
+//    Retryer  feignRetryer() {
+//        return new Retryer.Default();
+//    }
 }
