@@ -42,7 +42,7 @@ graph LR
     Server2 -.5:处理请求.-> Server2
     Server2 -.6:返回数据.-> Server1
 ```
-* 服务熔断: SpringCloudAlibabaSentinel
+* 服务熔断(服务保护): SpringCloudAlibabaSentinel
   * 当多个微服务组成一共业务的时候,其中一共微服务卡住,则整条业务链就会卡住,称为服务雪崩;为了避免服务雪崩,则需要在其中一个服务卡住的时候快速返回失败,避免卡住的情况,即服务熔断
 * 分布式事务: SpringCloudAlibabaSeata
   * 当多个微服务组成一共业务的时候,引入事务急值,即为分布式事务
@@ -595,4 +595,21 @@ public class XTokenRequestInterceptor implements RequestInterceptor {
         }
     }
     ```
-   4. 在Feign客户端类的注解中添加`fallback`属性指向兜底类即可完成:`@FeignClient(value = "service-product",fallback = ProductFeignClientFallback.class )`
+  4. 在Feign客户端类的注解中添加`fallback`属性指向兜底类即可完成:`@FeignClient(value = "service-product",fallback = ProductFeignClientFallback.class )`
+  5. 若要不需要所有拦截器都生效,则在配置文件中配置`request-interceptors:`指定生效的拦截器即可
+
+### Sentinel服务保护
+```mermaid
+graph TB
+User(用户) --> Res[资源]
+Res -->|Sentinel检查| Rule[规则]
+Rule --> Violate{违反}
+Violate -->|否| Run[放行]
+Violate -->|是| Error[抛出异常]
+Run --> End(结束)
+Error --> Fallback{兜底处理}
+Fullback -->|有| RunFallback[执行fallback]
+RunFallback --> End
+Fullback -->|无| DefError[默认错误]
+```
+1. 整合使用
