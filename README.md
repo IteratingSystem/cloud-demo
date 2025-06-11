@@ -608,8 +608,8 @@ Violate -->|否| Run[放行]
 Violate -->|是| Error[抛出异常]
 Run --> End(结束)
 Error --> Fallback{兜底处理}
-Fullback -->|有| RunFallback[执行fallback]
+Fallback -->|有| RunFallback[执行fallback]
 RunFallback --> End
-Fullback -->|无| DefError[默认错误]
+Fallback -->|无| DefError[默认错误]
 ```
 1. 整合使用
