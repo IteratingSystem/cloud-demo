@@ -1,6 +1,8 @@
 package com.engine.service.impl;
 
 
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
+import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.engine.feign.ProductFeignClient;
 import com.engine.order.bean.Order;
 import com.engine.product.bean.Product;
@@ -35,6 +37,8 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     RestTemplate restTemplate;
 
+    //资源方法
+    @SentinelResource(value = "createOrder",blockHandler = "createOrderFallback")
     @Override
     public Order createOrder(Long productId, Long userId) {
 //        Product product = getProductFromRemoteWithLoadBalancerAnnotation(productId);
@@ -47,6 +51,16 @@ public class OrderServiceImpl implements OrderService {
         order.setNickName("张三");
         order.setAddress("官方旗舰店");
         order.setProductList(Arrays.asList(product));
+        return order;
+    }
+    //兜底方法
+    public Order createOrderFallback(Long productId, Long userId, BlockException blockException) {
+        Order order = new Order();
+        order.setId(1L);
+        order.setTotalAmount(new BigDecimal(0));
+        order.setUserId(userId);
+        order.setNickName("兜底数据");
+        order.setAddress("");
         return order;
     }
 

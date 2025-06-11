@@ -25,12 +25,12 @@ public class ProductServiceImpl implements ProductService {
         product.setProductName("苹果-"+productId);
         product.setNum(2);
 
-        //模拟超时,休眠100秒后返回
-        try {
-            TimeUnit.SECONDS.sleep(100);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+//        //模拟超时,休眠100秒后返回
+//        try {
+//            TimeUnit.SECONDS.sleep(100);
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException(e);
+//        }
 
         return product;
     }

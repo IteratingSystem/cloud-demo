@@ -1,0 +1,7 @@
+spring:
+  cloud:
+    sentinel:
+      transport:
+        dashboard: localhost:8080
+      #饿加载,项目启动时加载
+      eager: true

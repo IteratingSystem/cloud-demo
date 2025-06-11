@@ -88,10 +88,10 @@ graph LR
 | SpringBoot         | 3.3.4      |
 
 
-| 组件软件     | 版本    | 功能                  | 启动方式 | 官网地址 |
-|----------|-------|---------------------| --- | --- |
-| Nacos    | 2.4.3 | 动态服务注册与发现,配置管理和服务管理 | startup.cmd -m standalone | https://nacos.io/ |
-| Sentinel | 1.8.8 | ---                 |
+| 组件软件     | 版本    | 功能                  | 启动方式                     | 官网地址                                      |
+|----------|-------|---------------------|--------------------------|-------------------------------------------|
+| Nacos    | 2.4.3 | 动态服务注册与发现,配置管理和服务管理 | startup.cmd -m standalone | https://nacos.io/                         |
+| Sentinel | 1.8.8 | 服务保护,资源管理策略         | java -jar xxx.jar | https://sentinelguard.io/zh-cn/index.html |
 | Seata    | 2.2.0 | ---                 |
 
 ### 工程结构
@@ -613,3 +613,117 @@ RunFallback --> End
 Fallback -->|无| DefError[默认错误]
 ```
 1. 整合使用
+   1. 下载`sentinel-dashboard-1.8.8.jar`工具
+   2. 使用java -jar命令启动它
+   3. 启动后默认在8080端口,访问`localhost:8080`即可
+   4. 默认账号密码均为`sentinel`
+   5. 项目引入依赖
+    ```xml
+    <!--sentinel服务保护-->
+    <dependency>
+        <groupId>com.alibaba.cloud</groupId>
+        <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
+    </dependency>
+    ```
+   6. 配置文件中配置`sentinel`相关属性
+    ```yaml
+    spring:
+      cloud:
+        sentinel:
+          transport:
+            dashboard: localhost:8080
+          #饿加载,项目启动时加载
+          eager: true
+    ```
+   7. 为资源添加`@SentinelResource`注解,例如:
+    ```java
+    @SentinelResource(value = "createOrder")
+    @Override
+    public Order createOrder(Long productId, Long userId) {
+        //...
+    }
+    ```
+   8. 在网页上对资源进行各种保护规则测试,比如QBS流量控制之类的
+2. 异常处理
+```mermaid
+graph TB
+Error[规则异常] --> BlockEx[BlockException]
+BlockEx --> Web[Web接口]
+BlockEx --> Res[@SentinelResource注解]
+BlockEx --> OpenFeign[OpenFeign调用]
+BlockEx --> Sp[SphU硬编码]
+Web --> ErrorInter[SentinelWebInterceptor]
+ErrorInter --> DefError[默认BlockExceptionHandler]
+DefError --> CuBEH[自定义BEH]
+Res --> SRA{SentinelResourceAspect}
+SRA --> BlockHandler[blockHandler]
+SRA --> FallBack[fallBack]
+BlockHandler --> Back[兜底回调]
+FallBack --> Back
+Back --> SpringBoot[SpringBoot异常处理]
+OpenFeign --> SF[SentinelFeign.builder()]
+SF --> FallBack
+Sp --> Try[try-catch]
+```
+* 被Sentinel限制的Web接口规则异常处理
+  * 创建自定义异常处理类,实现`BlockExceptionHandler`异常,并使用`@Component`添加到容器,示例代码:
+    ```java
+    @Component
+    public class MyBlockExceptionHandler implements BlockExceptionHandler {
+    private ObjectMapper mapper = new ObjectMapper();
+        @Override
+        public void handle(HttpServletRequest httpServletRequest,
+                           HttpServletResponse response,
+                           String s, BlockException e) throws Exception {
+            response.setContentType("Application/json;charset=utf-8");
+            PrintWriter out = response.getWriter();
+            R error = R.error(500, "被Sentinel限制了:"+e.getClass().getName());
+            String json = mapper.writeValueAsString(error);
+            out.write(json);
+            out.flush();
+            out.close();
+        }
+    }
+    ```
+* 使用`@SentinelResource`注解标记的资源违反规则异常处理
+  * 处理方式一:使用全局异常捕获
+    * 创建全局异常捕获类,使用`@RestControllerAdvice`注解使其捕获异常抱歉直接返回数据到前端,示例:
+    ```java
+    @RestControllerAdvice
+    public class GlobalExceptionHandler {
+    @ExceptionHandler(Throwable.class)
+    public String throwable(Throwable ex) {
+    return ex.getMessage();
+    }
+    }
+    ```
+  * 处理方式二:制作兜底返回
+    1. 为`@SentinelResource`注解加入`blockHandler=xxxx`属性,其值为兜底方法的方法名
+    2. 兜底方法签名与资源方法一致,其参数比资源方法多一个`BlockException e`参数,示例:
+    ```java
+    //资源方法
+    @SentinelResource(value = "createOrder",blockHandler = "createOrderFallback")
+    @Override
+    public Order createOrder(Long productId, Long userId) {
+        Product product = productFeignClient.getProduct(productId);
+        Order order = new Order();
+        order.setId(1L);
+        BigDecimal totalAmount = product.getPrice().multiply(BigDecimal.valueOf(product.getNum()));
+        order.setTotalAmount(totalAmount);
+        order.setUserId(userId);
+        order.setNickName("张三");
+        order.setAddress("官方旗舰店");
+        order.setProductList(Arrays.asList(product));
+        return order;
+    }
+    //兜底方法
+    public Order createOrderFallback(Long productId, Long userId, BlockException blockException) {
+        Order order = new Order();
+        order.setId(1L);
+        order.setTotalAmount(new BigDecimal(0));
+        order.setUserId(userId);
+        order.setNickName("兜底数据");
+        order.setAddress("");
+        return order;
+    }
+    ```
