@@ -16,7 +16,7 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>nacos-test</module>
+        <module>nacos-demo</module>
     </modules>
 
 </project>

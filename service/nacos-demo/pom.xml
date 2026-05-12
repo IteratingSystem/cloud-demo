@@ -12,7 +12,7 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>nacos-test</artifactId>
+    <artifactId>nacos-demo</artifactId>
 
     <dependencies>
         <!-- SpringBoot Web -->

@@ -8,8 +8,8 @@ import org.springframework.context.annotation.PropertySource;
 @SpringBootApplication
 @EnableDiscoveryClient
 @PropertySource("classpath:application.yml")
-public class NacosTestApplication {
+public class NacosDemoApplication {
     public static void main(String[] args) {
-        SpringApplication.run(NacosTestApplication.class, args);
+        SpringApplication.run(NacosDemoApplication.class, args);
     }
 }
