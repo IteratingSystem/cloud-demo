@@ -1,9 +1,10 @@
 server:
-  port: 8081
+  port: 8082
 
 spring:
   application:
-    name: nacos-demo
+    name: controller-demo
   cloud:
     nacos:
+      # 在此Demo中不是主要内容
       server-addr: 127.0.0.1:8848

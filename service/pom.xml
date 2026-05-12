@@ -17,6 +17,7 @@
 
     <modules>
         <module>nacos-demo</module>
+        <module>controller-demo</module>
     </modules>
 
 </project>
