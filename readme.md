@@ -180,3 +180,6 @@ public class RestTemplateFallback {
     }
 }
 ```
+## 5. Geteway 网关
+- 使用后,所有的微服务,使用同意端口访问
+- 原URL会变成 -> http://ip:gateway.prot/service.name(nacos中的服务名)/controller中的路径

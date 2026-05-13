@@ -1,0 +1,16 @@
+server:
+  port: 8089
+
+spring:
+  application:
+    name: gateway
+  cloud:
+    nacos:
+      server-addr: 127.0.0.1:8848
+    gateway:
+      discovery:
+        locator:
+          enabled: true                    # 开启自动路由（核心配置）
+          lower-case-service-id: true      # 服务名自动转换为小写
+      routes:
+      # 可选：如果需要添加自定义过滤器，可以手动配置，但不是必须的
