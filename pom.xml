@@ -21,7 +21,7 @@
     <name>cloud-demo</name>
     <description>SpringCloud学习项目</description>
     <modules>
-        <module>service</module>
+        <module>demo</module>
     </modules>
 
     <properties>
