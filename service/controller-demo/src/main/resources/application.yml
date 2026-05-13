@@ -4,6 +4,13 @@ server:
 spring:
   application:
     name: controller-demo
+  servlet:
+    multipart:
+      # 涉及到文件收发的接口时,需要设置文件参数大小
+      # 单个文件的大小限制
+      max-file-size: 10MB
+      # 整个请求的总大小限制
+      max-request-size: 10MB
   cloud:
     nacos:
       # 在此Demo中不是主要内容
