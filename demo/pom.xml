@@ -19,6 +19,7 @@
         <module>nacos-demo</module>
         <module>controller-demo</module>
         <module>openfeign-demo</module>
+        <module>sentinel-demo</module>
     </modules>
 
 </project>
