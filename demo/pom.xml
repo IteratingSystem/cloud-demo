@@ -21,6 +21,7 @@
         <module>openfeign-demo</module>
         <module>sentinel-demo</module>
         <module>resttemplate-demo</module>
+        <module>auth-demo</module>
     </modules>
 
 </project>

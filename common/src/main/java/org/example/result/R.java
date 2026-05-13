@@ -2,16 +2,22 @@ package org.example.result;
 
 import lombok.Data;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+
 @Data
 public class R<T> {
     private Integer code;
     private String message;
     private T data;
+    private String timestamp;
 
     public R(Integer code, String message, T data) {
         this.code = code;
         this.message = message;
         this.data = data;
+        timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
     }
 
     // ==================== 成功 ====================
