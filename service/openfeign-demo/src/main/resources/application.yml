@@ -1,0 +1,10 @@
+server:
+  port: 8083
+
+spring:
+  application:
+    name: openfeign-demo
+  cloud:
+    nacos:
+      # 在此Demo中不是主要内容
+      server-addr: 127.0.0.1:8848

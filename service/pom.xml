@@ -18,6 +18,7 @@
     <modules>
         <module>nacos-demo</module>
         <module>controller-demo</module>
+        <module>openfeign-demo</module>
     </modules>
 
 </project>
