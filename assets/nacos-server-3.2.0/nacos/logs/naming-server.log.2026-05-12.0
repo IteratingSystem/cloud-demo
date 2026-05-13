@@ -1,0 +1,88 @@
+2026-05-12 17:31:30,609 INFO [SelectorManager] Load SelectorContextBuilder(class com.alibaba.nacos.naming.selector.context.CmdbSelectorContextBuilder) contextType(CMDB) successfully.
+
+2026-05-12 17:31:30,609 INFO [SelectorManager] Load SelectorContextBuilder(class com.alibaba.nacos.naming.selector.context.NoneSelectorContextBuilder) contextType(NONE) successfully.
+
+2026-05-12 17:31:30,610 INFO [SelectorManager] Load Selector(class com.alibaba.nacos.naming.selector.LabelSelector) type(label) contextType(CMDB) successfully.
+
+2026-05-12 17:31:30,610 INFO [SelectorManager] Load Selector(class com.alibaba.nacos.naming.selector.NoneSelector) type(none) contextType(NONE) successfully.
+
+2026-05-12 17:34:00,754 INFO Client connection 1778578440657_127.0.0.1_11390 connect
+
+2026-05-12 17:34:00,836 INFO Client change for service Service{namespace='public', group='DEFAULT_GROUP', name='nacos-test', ephemeral=true, revision=0}, 1778578440657_127.0.0.1_11390
+
+2026-05-12 17:34:00,840 WARN [fuzzy-watch] service change matched,service key public@@DEFAULT_GROUP@@nacos-test,changed type ADD_SERVICE 
+
+2026-05-12 17:59:29,031 INFO Client remove for service Service{namespace='public', group='DEFAULT_GROUP', name='nacos-test', ephemeral=true, revision=3}, 1778578440657_127.0.0.1_11390
+
+2026-05-12 17:59:29,031 WARN [fuzzy-watch] service change matched,service key public@@DEFAULT_GROUP@@nacos-test,changed type DELETE_SERVICE 
+
+2026-05-12 17:59:29,040 INFO Client connection 1778578440657_127.0.0.1_11390 disconnect, remove instances and subscribers
+
+2026-05-12 17:59:33,889 INFO Client connection 1778579973830_127.0.0.1_14601 connect
+
+2026-05-12 17:59:33,909 INFO Client change for service Service{namespace='public', group='DEFAULT_GROUP', name='nacos-test', ephemeral=true, revision=4}, 1778579973830_127.0.0.1_14601
+
+2026-05-12 17:59:33,909 WARN [fuzzy-watch] service change matched,service key public@@DEFAULT_GROUP@@nacos-test,changed type ADD_SERVICE 
+
+2026-05-12 18:09:44,354 INFO Client connection 1778580584274_127.0.0.1_2556 connect
+
+2026-05-12 18:09:44,377 INFO Client change for service Service{namespace='public', group='DEFAULT_GROUP', name='nacos-test', ephemeral=true, revision=5}, 1778580584274_127.0.0.1_2556
+
+2026-05-12 18:10:08,312 INFO Client remove for service Service{namespace='public', group='DEFAULT_GROUP', name='nacos-test', ephemeral=true, revision=6}, 1778579973830_127.0.0.1_14601
+
+2026-05-12 18:10:08,318 INFO Client connection 1778579973830_127.0.0.1_14601 disconnect, remove instances and subscribers
+
+2026-05-12 18:10:12,372 INFO Client connection 1778580612312_127.0.0.1_2677 connect
+
+2026-05-12 18:10:12,390 INFO Client change for service Service{namespace='public', group='DEFAULT_GROUP', name='nacos-test', ephemeral=true, revision=7}, 1778580612312_127.0.0.1_2677
+
+2026-05-12 18:11:51,173 INFO Client remove for service Service{namespace='public', group='DEFAULT_GROUP', name='nacos-test', ephemeral=true, revision=8}, 1778580612312_127.0.0.1_2677
+
+2026-05-12 18:11:51,178 INFO Client connection 1778580612312_127.0.0.1_2677 disconnect, remove instances and subscribers
+
+2026-05-12 18:11:54,657 INFO Client connection 1778580714603_127.0.0.1_2750 connect
+
+2026-05-12 18:11:54,678 INFO Client change for service Service{namespace='public', group='DEFAULT_GROUP', name='nacos-test', ephemeral=true, revision=9}, 1778580714603_127.0.0.1_2750
+
+2026-05-12 18:12:25,342 INFO Client remove for service Service{namespace='public', group='DEFAULT_GROUP', name='nacos-test', ephemeral=true, revision=10}, 1778580584274_127.0.0.1_2556
+
+2026-05-12 18:12:25,347 INFO Client connection 1778580584274_127.0.0.1_2556 disconnect, remove instances and subscribers
+
+2026-05-12 18:12:28,264 INFO Client connection 1778580748204_127.0.0.1_2802 connect
+
+2026-05-12 18:12:28,282 INFO Client change for service Service{namespace='public', group='DEFAULT_GROUP', name='controller-demo', ephemeral=true, revision=0}, 1778580748204_127.0.0.1_2802
+
+2026-05-12 18:12:28,282 WARN [fuzzy-watch] service change matched,service key public@@DEFAULT_GROUP@@controller-demo,changed type ADD_SERVICE 
+
+2026-05-12 18:35:28,893 INFO Client remove for service Service{namespace='public', group='DEFAULT_GROUP', name='nacos-test', ephemeral=true, revision=11}, 1778580714603_127.0.0.1_2750
+
+2026-05-12 18:35:28,893 WARN [fuzzy-watch] service change matched,service key public@@DEFAULT_GROUP@@nacos-test,changed type DELETE_SERVICE 
+
+2026-05-12 18:35:28,898 INFO Client connection 1778580714603_127.0.0.1_2750 disconnect, remove instances and subscribers
+
+2026-05-12 18:35:31,870 INFO Client connection 1778582131809_127.0.0.1_4428 connect
+
+2026-05-12 18:35:31,888 INFO Client change for service Service{namespace='public', group='DEFAULT_GROUP', name='nacos-demo', ephemeral=true, revision=0}, 1778582131809_127.0.0.1_4428
+
+2026-05-12 18:35:31,888 WARN [fuzzy-watch] service change matched,service key public@@DEFAULT_GROUP@@nacos-demo,changed type ADD_SERVICE 
+
+2026-05-12 18:35:36,650 INFO Client remove for service Service{namespace='public', group='DEFAULT_GROUP', name='nacos-demo', ephemeral=true, revision=1}, 1778582131809_127.0.0.1_4428
+
+2026-05-12 18:35:36,650 INFO Client remove for service Service{namespace='public', group='DEFAULT_GROUP', name='controller-demo', ephemeral=true, revision=1}, 1778580748204_127.0.0.1_2802
+
+2026-05-12 18:35:36,650 WARN [fuzzy-watch] service change matched,service key public@@DEFAULT_GROUP@@nacos-demo,changed type DELETE_SERVICE 
+
+2026-05-12 18:35:36,650 WARN [fuzzy-watch] service change matched,service key public@@DEFAULT_GROUP@@controller-demo,changed type DELETE_SERVICE 
+
+2026-05-12 18:35:36,655 INFO Client connection 1778580748204_127.0.0.1_2802 disconnect, remove instances and subscribers
+
+2026-05-12 18:35:36,656 INFO Client connection 1778582131809_127.0.0.1_4428 disconnect, remove instances and subscribers
+
+2026-05-12 18:37:00,914 WARN namespace : public, [DEFAULT_GROUP@@nacos-test] services are automatically cleaned
+
+2026-05-12 18:37:00,915 WARN namespace : public, [DEFAULT_GROUP@@controller-demo] services are automatically cleaned
+
+2026-05-12 18:37:00,915 WARN namespace : public, [DEFAULT_GROUP@@nacos-demo] services are automatically cleaned
+
+2026-05-12 18:38:01,989 INFO Remove expired metadata ExpiredMetadataInfo{service=Service{namespace='public', group='DEFAULT_GROUP', name='nacos-test', ephemeral=true, revision=12}, metadataId='null', createTime=Tue May 12 18:37:00 CST 2026}
+

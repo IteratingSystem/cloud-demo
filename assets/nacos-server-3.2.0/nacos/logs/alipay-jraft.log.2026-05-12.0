@@ -1,0 +1,350 @@
+2026-05-12 17:31:29,578 INFO SPI service [com.alipay.sofa.jraft.JRaftServiceFactory - com.alipay.sofa.jraft.core.DefaultJRaftServiceFactory] loading.
+
+2026-05-12 17:31:29,675 INFO SPI service [com.alipay.sofa.jraft.rpc.RaftRpcFactory - com.alipay.sofa.jraft.rpc.impl.GrpcRaftRpcFactory] loading.
+
+2026-05-12 17:31:30,060 INFO SPI service [com.alipay.sofa.jraft.util.timer.RaftTimerFactory - com.alipay.sofa.jraft.util.timer.DefaultRaftTimerFactory] loading.
+
+2026-05-12 17:31:30,065 INFO The number of active nodes increment to 1.
+
+2026-05-12 17:31:30,239 INFO Starts FSMCaller successfully.
+
+2026-05-12 17:31:30,245 WARN No data for snapshot reader C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_persistent_service_v2\snapshot.
+
+2026-05-12 17:31:30,247 INFO Node <naming_persistent_service_v2/192.168.110.77:7848> init ballot box's lastCommittedIndex=0.
+
+2026-05-12 17:31:30,253 INFO Node <naming_persistent_service_v2/192.168.110.77:7848> init, term=0, lastLogId=LogId [index=0, term=0], conf=192.168.110.77:7848, oldConf=.
+
+2026-05-12 17:31:30,256 INFO Node <naming_persistent_service_v2/192.168.110.77:7848> start vote and grant vote self, term=0.
+
+2026-05-12 17:31:30,273 WARN Unable to fsync directory C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_persistent_service_v2\meta-data on windows.
+
+2026-05-12 17:31:30,279 INFO Save raft meta, path=C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_persistent_service_v2\meta-data, term=1, votedFor=192.168.110.77:7848, cost time=16 ms
+
+2026-05-12 17:31:30,279 INFO Node <naming_persistent_service_v2/192.168.110.77:7848> become leader of group, term=1, conf=192.168.110.77:7848, oldConf=.
+
+2026-05-12 17:31:30,282 INFO -Djraft.recyclers.maxCapacityPerThread: 4096.
+
+2026-05-12 17:31:30,285 INFO Start the RaftGroupService successfully.
+
+2026-05-12 17:31:30,297 INFO onLeaderStart: term=1.
+
+2026-05-12 17:31:30,303 INFO The number of active nodes increment to 2.
+
+2026-05-12 17:31:30,342 INFO Starts FSMCaller successfully.
+
+2026-05-12 17:31:30,342 WARN No data for snapshot reader C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_persistent_service\snapshot.
+
+2026-05-12 17:31:30,342 INFO Node <naming_persistent_service/192.168.110.77:7848> init ballot box's lastCommittedIndex=0.
+
+2026-05-12 17:31:30,343 INFO Node <naming_persistent_service/192.168.110.77:7848> init, term=0, lastLogId=LogId [index=0, term=0], conf=192.168.110.77:7848, oldConf=.
+
+2026-05-12 17:31:30,343 INFO Node <naming_persistent_service/192.168.110.77:7848> start vote and grant vote self, term=0.
+
+2026-05-12 17:31:30,347 WARN Unable to fsync directory C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_persistent_service\meta-data on windows.
+
+2026-05-12 17:31:30,347 INFO Save raft meta, path=C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_persistent_service\meta-data, term=1, votedFor=192.168.110.77:7848, cost time=4 ms
+
+2026-05-12 17:31:30,347 INFO Node <naming_persistent_service/192.168.110.77:7848> become leader of group, term=1, conf=192.168.110.77:7848, oldConf=.
+
+2026-05-12 17:31:30,348 INFO Start the RaftGroupService successfully.
+
+2026-05-12 17:31:30,349 INFO onLeaderStart: term=1.
+
+2026-05-12 17:31:30,362 INFO The number of active nodes increment to 3.
+
+2026-05-12 17:31:30,400 INFO Starts FSMCaller successfully.
+
+2026-05-12 17:31:30,400 WARN No data for snapshot reader C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_instance_metadata\snapshot.
+
+2026-05-12 17:31:30,400 INFO Node <naming_instance_metadata/192.168.110.77:7848> init ballot box's lastCommittedIndex=0.
+
+2026-05-12 17:31:30,400 INFO Node <naming_instance_metadata/192.168.110.77:7848> init, term=0, lastLogId=LogId [index=0, term=0], conf=192.168.110.77:7848, oldConf=.
+
+2026-05-12 17:31:30,401 INFO Node <naming_instance_metadata/192.168.110.77:7848> start vote and grant vote self, term=0.
+
+2026-05-12 17:31:30,406 WARN Unable to fsync directory C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_instance_metadata\meta-data on windows.
+
+2026-05-12 17:31:30,407 INFO Save raft meta, path=C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_instance_metadata\meta-data, term=1, votedFor=192.168.110.77:7848, cost time=6 ms
+
+2026-05-12 17:31:30,407 INFO Node <naming_instance_metadata/192.168.110.77:7848> become leader of group, term=1, conf=192.168.110.77:7848, oldConf=.
+
+2026-05-12 17:31:30,407 INFO Start the RaftGroupService successfully.
+
+2026-05-12 17:31:30,408 INFO Creating new channel to: 192.168.110.77:7848.
+
+2026-05-12 17:31:30,410 INFO onLeaderStart: term=1.
+
+2026-05-12 17:31:30,411 INFO The number of active nodes increment to 4.
+
+2026-05-12 17:31:30,422 INFO The channel 192.168.110.77:7848 is in state: CONNECTING.
+
+2026-05-12 17:31:30,447 INFO Starts FSMCaller successfully.
+
+2026-05-12 17:31:30,448 WARN No data for snapshot reader C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_service_metadata\snapshot.
+
+2026-05-12 17:31:30,448 INFO Node <naming_service_metadata/192.168.110.77:7848> init ballot box's lastCommittedIndex=0.
+
+2026-05-12 17:31:30,448 INFO Node <naming_service_metadata/192.168.110.77:7848> init, term=0, lastLogId=LogId [index=0, term=0], conf=192.168.110.77:7848, oldConf=.
+
+2026-05-12 17:31:30,449 INFO Node <naming_service_metadata/192.168.110.77:7848> start vote and grant vote self, term=0.
+
+2026-05-12 17:31:30,453 WARN Unable to fsync directory C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_service_metadata\meta-data on windows.
+
+2026-05-12 17:31:30,453 INFO Save raft meta, path=C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_service_metadata\meta-data, term=1, votedFor=192.168.110.77:7848, cost time=4 ms
+
+2026-05-12 17:31:30,453 INFO Node <naming_service_metadata/192.168.110.77:7848> become leader of group, term=1, conf=192.168.110.77:7848, oldConf=.
+
+2026-05-12 17:31:30,453 INFO Start the RaftGroupService successfully.
+
+2026-05-12 17:31:30,458 INFO onLeaderStart: term=1.
+
+2026-05-12 17:31:30,641 INFO The channel 192.168.110.77:7848 is in state: READY.
+
+2026-05-12 17:31:30,641 INFO The channel 192.168.110.77:7848 has successfully established.
+
+2026-05-12 17:31:31,312 INFO The number of active nodes increment to 5.
+
+2026-05-12 17:31:31,358 INFO Starts FSMCaller successfully.
+
+2026-05-12 17:31:31,358 WARN No data for snapshot reader C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\lock_acquire_service_v2\snapshot.
+
+2026-05-12 17:31:31,358 INFO Node <lock_acquire_service_v2/192.168.110.77:7848> init ballot box's lastCommittedIndex=0.
+
+2026-05-12 17:31:31,359 INFO Node <lock_acquire_service_v2/192.168.110.77:7848> init, term=0, lastLogId=LogId [index=0, term=0], conf=192.168.110.77:7848, oldConf=.
+
+2026-05-12 17:31:31,359 INFO Node <lock_acquire_service_v2/192.168.110.77:7848> start vote and grant vote self, term=0.
+
+2026-05-12 17:31:31,364 WARN Unable to fsync directory C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\lock_acquire_service_v2\meta-data on windows.
+
+2026-05-12 17:31:31,364 INFO Save raft meta, path=C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\lock_acquire_service_v2\meta-data, term=1, votedFor=192.168.110.77:7848, cost time=5 ms
+
+2026-05-12 17:31:31,364 INFO Node <lock_acquire_service_v2/192.168.110.77:7848> become leader of group, term=1, conf=192.168.110.77:7848, oldConf=.
+
+2026-05-12 17:31:31,365 INFO Start the RaftGroupService successfully.
+
+2026-05-12 17:31:31,367 INFO onLeaderStart: term=1.
+
+2026-05-12 17:31:31,465 INFO The number of active nodes increment to 6.
+
+2026-05-12 17:31:31,501 INFO Starts FSMCaller successfully.
+
+2026-05-12 17:31:31,502 WARN No data for snapshot reader C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\plugin_state\snapshot.
+
+2026-05-12 17:31:31,502 INFO Node <plugin_state/192.168.110.77:7848> init ballot box's lastCommittedIndex=0.
+
+2026-05-12 17:31:31,502 INFO Node <plugin_state/192.168.110.77:7848> init, term=0, lastLogId=LogId [index=0, term=0], conf=192.168.110.77:7848, oldConf=.
+
+2026-05-12 17:31:31,502 INFO Node <plugin_state/192.168.110.77:7848> start vote and grant vote self, term=0.
+
+2026-05-12 17:31:31,506 WARN Unable to fsync directory C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\plugin_state\meta-data on windows.
+
+2026-05-12 17:31:31,506 INFO Save raft meta, path=C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\plugin_state\meta-data, term=1, votedFor=192.168.110.77:7848, cost time=3 ms
+
+2026-05-12 17:31:31,506 INFO Node <plugin_state/192.168.110.77:7848> become leader of group, term=1, conf=192.168.110.77:7848, oldConf=.
+
+2026-05-12 17:31:31,506 INFO Start the RaftGroupService successfully.
+
+2026-05-12 17:31:31,509 INFO onLeaderStart: term=1.
+
+2026-05-12 17:47:57,510 WARN Unable to fsync directory C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_persistent_service\snapshot\temp on windows.
+
+2026-05-12 17:47:57,510 INFO Deleting snapshot C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_persistent_service\snapshot\snapshot_1.
+
+2026-05-12 17:47:57,510 INFO Renaming C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_persistent_service\snapshot\temp to C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_persistent_service\snapshot\snapshot_1.
+
+2026-05-12 17:47:57,511 WARN Unable to fsync directory C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_persistent_service\snapshot on windows.
+
+2026-05-12 17:51:46,918 WARN Unable to fsync directory C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_persistent_service_v2\snapshot\temp on windows.
+
+2026-05-12 17:51:46,918 INFO Deleting snapshot C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_persistent_service_v2\snapshot\snapshot_1.
+
+2026-05-12 17:51:46,918 INFO Renaming C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_persistent_service_v2\snapshot\temp to C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_persistent_service_v2\snapshot\snapshot_1.
+
+2026-05-12 17:51:46,919 WARN Unable to fsync directory C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_persistent_service_v2\snapshot on windows.
+
+2026-05-12 17:53:25,717 WARN Unable to fsync directory C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_service_metadata\snapshot\temp on windows.
+
+2026-05-12 17:53:25,717 INFO Deleting snapshot C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_service_metadata\snapshot\snapshot_3.
+
+2026-05-12 17:53:25,717 INFO Renaming C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_service_metadata\snapshot\temp to C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_service_metadata\snapshot\snapshot_3.
+
+2026-05-12 17:53:25,717 WARN Unable to fsync directory C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_service_metadata\snapshot on windows.
+
+2026-05-12 17:53:30,774 WARN Unable to fsync directory C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_instance_metadata\snapshot\temp on windows.
+
+2026-05-12 17:53:30,774 INFO Deleting snapshot C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_instance_metadata\snapshot\snapshot_1.
+
+2026-05-12 17:53:30,774 INFO Renaming C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_instance_metadata\snapshot\temp to C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_instance_metadata\snapshot\snapshot_1.
+
+2026-05-12 17:53:30,774 WARN Unable to fsync directory C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_instance_metadata\snapshot on windows.
+
+2026-05-12 17:54:25,830 WARN Unable to fsync directory C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\lock_acquire_service_v2\snapshot\temp on windows.
+
+2026-05-12 17:54:25,830 INFO Deleting snapshot C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\lock_acquire_service_v2\snapshot\snapshot_1.
+
+2026-05-12 17:54:25,830 INFO Renaming C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\lock_acquire_service_v2\snapshot\temp to C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\lock_acquire_service_v2\snapshot\snapshot_1.
+
+2026-05-12 17:54:25,831 WARN Unable to fsync directory C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\lock_acquire_service_v2\snapshot on windows.
+
+2026-05-12 17:59:26,647 WARN Unable to fsync directory C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\plugin_state\snapshot\temp on windows.
+
+2026-05-12 17:59:26,647 INFO Deleting snapshot C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\plugin_state\snapshot\snapshot_1.
+
+2026-05-12 17:59:26,647 INFO Renaming C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\plugin_state\snapshot\temp to C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\plugin_state\snapshot\snapshot_1.
+
+2026-05-12 17:59:26,648 WARN Unable to fsync directory C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\plugin_state\snapshot on windows.
+
+2026-05-12 18:17:57,516 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_persistent_service\log from log index 1 to 2, cost 1 ms.
+
+2026-05-12 18:21:46,942 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_persistent_service_v2\log from log index 1 to 2, cost 0 ms.
+
+2026-05-12 18:23:25,758 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_service_metadata\log from log index 1 to 4, cost 0 ms.
+
+2026-05-12 18:23:30,833 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_instance_metadata\log from log index 1 to 2, cost 0 ms.
+
+2026-05-12 18:24:25,871 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\lock_acquire_service_v2\log from log index 1 to 2, cost 0 ms.
+
+2026-05-12 18:29:26,681 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\plugin_state\log from log index 1 to 2, cost 0 ms.
+
+2026-05-12 18:47:57,562 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_persistent_service\log from log index 2 to 2, cost 0 ms.
+
+2026-05-12 18:51:46,960 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_persistent_service_v2\log from log index 2 to 2, cost 0 ms.
+
+2026-05-12 18:53:25,787 WARN Unable to fsync directory C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_service_metadata\snapshot\temp on windows.
+
+2026-05-12 18:53:25,787 INFO Deleting snapshot C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_service_metadata\snapshot\snapshot_4.
+
+2026-05-12 18:53:25,787 INFO Renaming C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_service_metadata\snapshot\temp to C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_service_metadata\snapshot\snapshot_4.
+
+2026-05-12 18:53:25,788 WARN Unable to fsync directory C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_service_metadata\snapshot on windows.
+
+2026-05-12 18:53:25,788 INFO Deleting snapshot C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_service_metadata\snapshot\snapshot_3.
+
+2026-05-12 18:53:25,796 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_service_metadata\log from log index 4 to 4, cost 0 ms.
+
+2026-05-12 18:53:30,857 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_instance_metadata\log from log index 2 to 2, cost 0 ms.
+
+2026-05-12 18:54:25,904 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\lock_acquire_service_v2\log from log index 2 to 2, cost 0 ms.
+
+2026-05-12 18:59:26,706 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\plugin_state\log from log index 2 to 2, cost 0 ms.
+
+2026-05-12 19:17:57,586 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_persistent_service\log from log index 2 to 2, cost 0 ms.
+
+2026-05-12 19:21:47,012 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_persistent_service_v2\log from log index 2 to 2, cost 0 ms.
+
+2026-05-12 19:23:25,802 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_service_metadata\log from log index 4 to 5, cost 0 ms.
+
+2026-05-12 19:23:30,886 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_instance_metadata\log from log index 2 to 2, cost 0 ms.
+
+2026-05-12 19:24:25,912 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\lock_acquire_service_v2\log from log index 2 to 2, cost 0 ms.
+
+2026-05-12 19:29:26,723 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\plugin_state\log from log index 2 to 2, cost 0 ms.
+
+2026-05-12 19:47:57,601 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_persistent_service\log from log index 2 to 2, cost 0 ms.
+
+2026-05-12 19:51:47,007 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_persistent_service_v2\log from log index 2 to 2, cost 0 ms.
+
+2026-05-12 19:53:25,819 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_service_metadata\log from log index 5 to 5, cost 0 ms.
+
+2026-05-12 19:53:30,902 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_instance_metadata\log from log index 2 to 2, cost 0 ms.
+
+2026-05-12 19:54:25,944 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\lock_acquire_service_v2\log from log index 2 to 2, cost 0 ms.
+
+2026-05-12 19:59:26,742 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\plugin_state\log from log index 2 to 2, cost 0 ms.
+
+2026-05-12 20:17:57,606 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_persistent_service\log from log index 2 to 2, cost 0 ms.
+
+2026-05-12 20:21:47,047 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_persistent_service_v2\log from log index 2 to 2, cost 0 ms.
+
+2026-05-12 20:23:25,840 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_service_metadata\log from log index 5 to 5, cost 0 ms.
+
+2026-05-12 20:23:30,902 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_instance_metadata\log from log index 2 to 2, cost 0 ms.
+
+2026-05-12 20:24:25,954 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\lock_acquire_service_v2\log from log index 2 to 2, cost 0 ms.
+
+2026-05-12 20:29:26,765 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\plugin_state\log from log index 2 to 2, cost 0 ms.
+
+2026-05-12 20:47:57,639 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_persistent_service\log from log index 2 to 2, cost 0 ms.
+
+2026-05-12 20:51:47,064 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_persistent_service_v2\log from log index 2 to 2, cost 0 ms.
+
+2026-05-12 20:53:25,855 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_service_metadata\log from log index 5 to 5, cost 0 ms.
+
+2026-05-12 20:53:30,935 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_instance_metadata\log from log index 2 to 2, cost 0 ms.
+
+2026-05-12 20:54:25,977 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\lock_acquire_service_v2\log from log index 2 to 2, cost 0 ms.
+
+2026-05-12 20:59:26,773 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\plugin_state\log from log index 2 to 2, cost 0 ms.
+
+2026-05-12 21:17:57,660 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_persistent_service\log from log index 2 to 2, cost 0 ms.
+
+2026-05-12 21:21:47,080 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_persistent_service_v2\log from log index 2 to 2, cost 0 ms.
+
+2026-05-12 21:23:25,878 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_service_metadata\log from log index 5 to 5, cost 0 ms.
+
+2026-05-12 21:23:30,955 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_instance_metadata\log from log index 2 to 2, cost 0 ms.
+
+2026-05-12 21:24:25,993 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\lock_acquire_service_v2\log from log index 2 to 2, cost 0 ms.
+
+2026-05-12 21:29:26,783 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\plugin_state\log from log index 2 to 2, cost 0 ms.
+
+2026-05-12 21:47:57,682 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_persistent_service\log from log index 2 to 2, cost 0 ms.
+
+2026-05-12 21:51:47,102 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_persistent_service_v2\log from log index 2 to 2, cost 0 ms.
+
+2026-05-12 21:53:25,881 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_service_metadata\log from log index 5 to 5, cost 0 ms.
+
+2026-05-12 21:53:30,966 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_instance_metadata\log from log index 2 to 2, cost 0 ms.
+
+2026-05-12 21:54:26,006 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\lock_acquire_service_v2\log from log index 2 to 2, cost 0 ms.
+
+2026-05-12 21:59:26,808 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\plugin_state\log from log index 2 to 2, cost 0 ms.
+
+2026-05-12 22:17:57,691 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_persistent_service\log from log index 2 to 2, cost 1 ms.
+
+2026-05-12 22:21:47,100 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_persistent_service_v2\log from log index 2 to 2, cost 0 ms.
+
+2026-05-12 22:23:25,914 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_service_metadata\log from log index 5 to 5, cost 1 ms.
+
+2026-05-12 22:23:30,976 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_instance_metadata\log from log index 2 to 2, cost 0 ms.
+
+2026-05-12 22:24:26,014 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\lock_acquire_service_v2\log from log index 2 to 2, cost 0 ms.
+
+2026-05-12 22:29:26,827 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\plugin_state\log from log index 2 to 2, cost 0 ms.
+
+2026-05-12 22:47:57,680 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_persistent_service\log from log index 2 to 2, cost 1 ms.
+
+2026-05-12 22:51:47,129 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_persistent_service_v2\log from log index 2 to 2, cost 0 ms.
+
+2026-05-12 22:53:25,929 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_service_metadata\log from log index 5 to 5, cost 0 ms.
+
+2026-05-12 22:53:30,985 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_instance_metadata\log from log index 2 to 2, cost 0 ms.
+
+2026-05-12 22:54:26,033 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\lock_acquire_service_v2\log from log index 2 to 2, cost 0 ms.
+
+2026-05-12 22:59:26,848 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\plugin_state\log from log index 2 to 2, cost 0 ms.
+
+2026-05-12 23:17:57,708 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_persistent_service\log from log index 2 to 2, cost 0 ms.
+
+2026-05-12 23:21:47,140 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_persistent_service_v2\log from log index 2 to 2, cost 0 ms.
+
+2026-05-12 23:23:25,948 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_service_metadata\log from log index 5 to 5, cost 0 ms.
+
+2026-05-12 23:23:31,003 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_instance_metadata\log from log index 2 to 2, cost 0 ms.
+
+2026-05-12 23:24:26,039 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\lock_acquire_service_v2\log from log index 2 to 2, cost 1 ms.
+
+2026-05-12 23:29:26,863 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\plugin_state\log from log index 2 to 2, cost 0 ms.
+
+2026-05-12 23:47:57,714 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_persistent_service\log from log index 2 to 2, cost 0 ms.
+
+2026-05-12 23:51:47,155 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_persistent_service_v2\log from log index 2 to 2, cost 0 ms.
+
+2026-05-12 23:53:25,964 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_service_metadata\log from log index 5 to 5, cost 1 ms.
+
+2026-05-12 23:53:31,018 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\naming_instance_metadata\log from log index 2 to 2, cost 0 ms.
+
+2026-05-12 23:54:26,048 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\lock_acquire_service_v2\log from log index 2 to 2, cost 0 ms.
+
+2026-05-12 23:59:26,873 INFO Truncated prefix logs in data path: C:\Tools\nacos-server-3.2.0\nacos\data\protocol\raft\plugin_state\log from log index 2 to 2, cost 0 ms.
+
