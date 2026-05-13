@@ -66,4 +66,117 @@ spring:
 2. 为转发目标创建client,示例:openfeign-demo中的DemoClient
 3. 调用Client即为调用目标请求,示例:openfeign-demo中的DemoController
 
-## 4. OpenFeign 服务转发
+## 4. Sentinel 熔断与兜底
+
+### 使用版本
+- Sentinel Dashboard 1.8.9
+- spring-cloud-starter-alibaba-sentinel 2023.0.3.2
+
+### 使用方式
+
+#### 4.1 下载并启动 Sentinel Dashboard
+```bash
+# 下载 sentinel-dashboard-1.8.9.jar
+# 启动（指定端口，避免与 Nacos 冲突）
+java -jar sentinel-dashboard-1.8.9.jar --server.port=8090
+```
+访问：http://localhost:8090
+默认账号/密码：sentinel/sentinel
+
+#### 4.2 微服务引入 Sentinel 依赖
+```xml
+<dependency>
+    <groupId>com.alibaba.cloud</groupId>
+    <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-loadbalancer</artifactId>
+</dependency>
+```
+
+#### 4.3 配置 Sentinel
+```yaml
+spring:
+  cloud:
+    sentinel:
+      transport:
+        dashboard: localhost:8090
+      eager: true
+
+feign:
+  sentinel:
+    enabled: true
+```
+#### 4.4 三种请求的兜底方式
+##### 方式一：OpenFeign + fallback（服务间调用）
+##### Feign 客户端：
+```java
+@FeignClient(value = "controller-demo", fallback = DemoClientFallback.class)
+public interface DemoClient {
+    @GetMapping("/demo/controller/get")
+    String get();
+}
+```
+##### Fallback 兜底类：
+```java
+@Component
+public class DemoClientFallback implements DemoClient {
+    @Override
+    public String get() {
+        return "【Fallback】服务熔断，返回兜底数据";
+    }
+}
+```
+
+##### 方式二：@SentinelResource 注解（本地方法兜底）
+```java
+@Service
+public class DemoService {
+    @SentinelResource(value = "testMethod", fallback = "testMethodFallback")
+    public String testMethod(String id) {
+        // 业务逻辑
+        return "success";
+    }
+    
+    public String testMethodFallback(String id, Throwable ex) {
+        return "【Fallback】方法执行失败：" + ex.getMessage();
+    }
+}
+```
+
+##### 方式三：RestTemplate + Sentinel（外部调用兜底）
+##### 配置类：
+```java
+@Configuration
+public class RestTemplateConfig {
+    @Bean
+    @LoadBalanced
+    @SentinelRestTemplate(
+        fallback = "handleFallback",
+        fallbackClass = RestTemplateFallback.class,
+        blockHandler = "handleBlock",
+        blockHandlerClass = RestTemplateFallback.class
+    )
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
+}
+```
+##### Fallback 兜底类：
+```java
+@Component
+public class RestTemplateFallback {
+    public static ClientHttpResponse handleFallback(HttpRequest request, byte[] body,
+                                                    ClientHttpRequestExecution execution, Throwable ex) {
+        String msg = "【Fallback】调用失败：" + ex.getMessage();
+        return ClientHttpResponse.create(HttpStatusCode.valueOf(200), new HttpHeaders(), msg.getBytes());
+    }
+    
+    public static ClientHttpResponse handleBlock(HttpRequest request, byte[] body,
+                                                 ClientHttpRequestExecution execution, BlockException ex) {
+        String msg = "【BlockHandler】服务被限流或熔断：" + ex.getClass().getSimpleName();
+        return ClientHttpResponse.create(HttpStatusCode.valueOf(200), new HttpHeaders(), msg.getBytes());
+    }
+}
+```
