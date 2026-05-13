@@ -18,7 +18,6 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/demo/controller")
 public class DemoController {
 
     // ==================== 请求方式示例 ====================

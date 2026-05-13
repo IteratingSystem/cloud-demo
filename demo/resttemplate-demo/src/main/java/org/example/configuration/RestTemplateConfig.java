@@ -1,4 +1,4 @@
-package org.example.config;
+package org.example.configuration;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;

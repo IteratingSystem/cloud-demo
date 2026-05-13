@@ -1,5 +1,5 @@
 server:
-  port: 8089
+  port: 8088
 
 spring:
   application:
@@ -10,7 +10,11 @@ spring:
     gateway:
       discovery:
         locator:
-          enabled: true                    # 开启自动路由（核心配置）
-          lower-case-service-id: true      # 服务名自动转换为小写
+          enabled: true
+          lower-case-service-id: true
       routes:
-      # 可选：如果需要添加自定义过滤器，可以手动配置，但不是必须的
+        # auth-demo 路由（不需要鉴权，但网关会放行）
+        - id: auth-demo-route
+          uri: lb://auth-demo
+          predicates:
+            - Path=/auth/**
