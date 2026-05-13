@@ -65,3 +65,4 @@ spring:
 1. 服务的Application添加注解:@EnableFeignClients,示例:openfeign-demo
 2. 为转发目标创建client,示例:openfeign-demo中的DemoClient
 3. 调用Client即为调用目标请求,示例:openfeign-demo中的DemoController
+

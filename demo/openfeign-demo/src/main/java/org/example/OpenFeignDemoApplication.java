@@ -12,7 +12,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-//此demo关键注解
+//此demo为关键注解
 @EnableFeignClients
 public class OpenFeignDemoApplication {
     public static void main(String[] args) {
