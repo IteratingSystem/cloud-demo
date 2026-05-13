@@ -37,11 +37,11 @@ nacos.core.auth.enabled=false
 ### 填写默认账号与密码
 
 #### 2.4 启动 Nacos
-cd nacos-server-3.2.0\nacos\bin
-startup.cmd -m standalone
-
+- cd nacos-server-3.2.0\nacos\bin
+- startup.cmd -m standalone
+- 由于git上传文件的限制，我已将nacos中的
 #### 2.5 微服务配置
-在微服务的 application.yml 中添加：
+在微服务的 application.yml 中添加：target文件（核心文件）分片压缩，需要自行解压
 ```yaml
 spring:
   cloud:
