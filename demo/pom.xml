@@ -20,6 +20,7 @@
         <module>controller-demo</module>
         <module>openfeign-demo</module>
         <module>sentinel-demo</module>
+        <module>resttemplate-demo</module>
     </modules>
 
 </project>

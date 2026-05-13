@@ -224,4 +224,59 @@ public class DemoController {
         result.put("requestURI", request.getRequestURI());
         return result;
     }
+
+
+
+    // ==================== 熔断测试接口 ====================
+
+    /**
+     * 模拟慢接口 - 延迟响应
+     * 用于触发 Sentinel 熔断
+     *
+     * 请求示例：GET /demo/controller/slow
+     */
+    @GetMapping("/slow")
+    public String slow() throws InterruptedException {
+        // 模拟延迟 3 秒响应
+        Thread.sleep(3000);
+        return "慢接口响应，延迟 3 秒";
+    }
+
+    /**
+     * 模拟随机失败接口
+     * 有 50% 概率返回错误，用于测试熔断
+     *
+     * 请求示例：GET /demo/controller/random-fail
+     */
+    @GetMapping("/random-fail")
+    public Map<String, Object> randomFail() {
+        Map<String, Object> result = new HashMap<>();
+
+        // 随机生成 0-9 的数字
+        int random = (int) (Math.random() * 10);
+
+        if (random < 5) {
+            // 50% 概率失败
+            result.put("code", 500);
+            result.put("message", "模拟服务异常");
+            return result;
+        }
+
+        result.put("code", 200);
+        result.put("message", "请求成功");
+        result.put("data", "这是正常返回的数据");
+        return result;
+    }
+
+    /**
+     * 模拟高延迟接口（可配置延迟时间）
+     *
+     * 请求示例：GET /demo/controller/delay?ms=5000
+     */
+    @GetMapping("/delay")
+    public String delay(@RequestParam(value = "ms", defaultValue = "2000") long ms)
+            throws InterruptedException {
+        Thread.sleep(ms);
+        return String.format("延迟 %d 毫秒后响应", ms);
+    }
 }

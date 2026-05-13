@@ -1,0 +1,18 @@
+server:
+  port: 8085
+
+spring:
+  application:
+    name: resttemplate-demo
+  cloud:
+    nacos:
+      server-addr: 127.0.0.1:8848
+    sentinel:
+      transport:
+        dashboard: localhost:8090
+      eager: true
+
+# 自定义超时配置
+resttemplate:
+  connect-timeout: 5000
+  read-timeout: 5000

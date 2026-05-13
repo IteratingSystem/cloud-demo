@@ -19,6 +19,7 @@
     <name>cloud-demo</name>
     <description>SpringCloud学习项目</description>
     <modules>
+        <module>common</module>
         <module>demo</module>
     </modules>
 
@@ -34,6 +35,15 @@
 
     <dependencyManagement>
         <dependencies>
+
+
+            <!-- 公共模块 -->
+            <dependency>
+                <groupId>org.example</groupId>
+                <artifactId>common</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
 
             <!-- 覆盖 Netty 版本，修复 CVE-2025-58057 -->
             <dependency>

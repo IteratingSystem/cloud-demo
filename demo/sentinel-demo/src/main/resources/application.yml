@@ -1,0 +1,18 @@
+server:
+  port: 8084
+
+spring:
+  application:
+    name: sentinel-demo
+  cloud:
+    nacos:
+      server-addr: 127.0.0.1:8848
+    # 关键内容
+    sentinel:
+      transport:
+        dashboard: 127.0.0.1:8090
+      eager: true
+# 关键内容
+feign:
+  sentinel:
+    enabled: true
