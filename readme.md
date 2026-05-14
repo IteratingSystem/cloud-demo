@@ -183,3 +183,8 @@ public class RestTemplateFallback {
 ## 5. Geteway 网关
 - 使用后,所有的微服务,使用同意端口访问
 - 原URL会变成 -> http://ip:gateway.prot/service.name(nacos中的服务名)/controller中的路径
+
+## 6. 打包
+- 正常打包（install）即可
+- 项目模块（cloud-demo）不需要打包
+- 公共模块（common）不需要打包
