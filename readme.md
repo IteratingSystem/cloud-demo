@@ -188,3 +188,14 @@ public class RestTemplateFallback {
 - 正常打包（install）即可
 - 项目模块（cloud-demo）不需要打包
 - 公共模块（common）不需要打包
+- 需要确保服务的pom.xml中有打包插件
+```xml
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+```
